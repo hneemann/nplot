@@ -1,4 +1,4 @@
-module gonum.org/v1/plot
+module github.com/hneemann/plot
 
 go 1.12
 
