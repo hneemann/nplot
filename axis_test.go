@@ -74,7 +74,7 @@ var axisSmallTickTests = []struct {
 func TestAxisSmallTick(t *testing.T) {
 	d := DefaultTicks{}
 	for i, test := range axisSmallTickTests {
-		ticks := d.Ticks(test.min, test.max)
+		ticks := d.Ticks(test.min, test.max, nil, 0)
 		gotLabels := labelsOf(ticks)
 		gotValues := valuesOf(ticks)
 		if !reflect.DeepEqual(gotValues, test.wantValues) {
@@ -128,7 +128,7 @@ func TestTickerFunc_Ticks(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := tt.f.Ticks(tt.args.min, tt.args.max); !reflect.DeepEqual(got, tt.want) {
+			if got := tt.f.Ticks(tt.args.min, tt.args.max, nil, 0); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("TickerFunc.Ticks() = %v, want %v", got, tt.want)
 			}
 		})

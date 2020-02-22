@@ -14,10 +14,13 @@ import (
 	"gonum.org/v1/plot/vg/draw"
 )
 
+// StringSizer returns the width of the given string.
+type StringSizer func(str string) vg.Length
+
 // Ticker creates Ticks in a specified range
 type Ticker interface {
 	// Ticks returns Ticks in a specified range
-	Ticks(min, max float64) []Tick
+	Ticks(min, max float64, stringSizer StringSizer, axisSize vg.Length) []Tick
 }
 
 // Normalizer rescales values from the data coordinate system to the
@@ -147,6 +150,20 @@ func (a *Axis) sanitizeRange() {
 	}
 }
 
+// createHorizontalMarker generates a set of marks suited for use on a horizontal axis
+func (a *Axis) CreateHorizontalMarks(c draw.Canvas) []Tick {
+	width := c.X(a.Norm(a.Max)) - c.X(a.Norm(a.Min))
+	stringSizer := func(str string) vg.Length { return a.Tick.Label.Font.Width(str) }
+	return a.Tick.Marker.Ticks(a.Min, a.Max, stringSizer, width)
+}
+
+// createVerticalMarker generates a set of marks suited for use on a vertical axis
+func (a *Axis) CreateVerticalMarks(c draw.Canvas) []Tick {
+	width := c.Y(a.Norm(a.Max)) - c.Y(a.Norm(a.Min))
+	stringSizer := func(str string) vg.Length { return a.Tick.Label.Font.Size }
+	return a.Tick.Marker.Ticks(a.Min, a.Max, stringSizer, width)
+}
+
 // LinearScale an be used as the value of an Axis.Scale function to
 // set the axis to a standard linear scale.
 type LinearScale struct{}
@@ -205,13 +222,13 @@ type horizontalAxis struct {
 }
 
 // size returns the height of the axis.
-func (a horizontalAxis) size() (h vg.Length) {
+func (a horizontalAxis) size(c draw.Canvas) (h vg.Length) {
 	if a.Label.Text != "" { // We assume that the label isn't rotated.
 		h -= a.Label.Font.Extents().Descent
 		h += a.Label.Height(a.Label.Text)
 	}
 
-	marks := a.Tick.Marker.Ticks(a.Min, a.Max)
+	marks := a.CreateHorizontalMarks(c)
 	if len(marks) > 0 {
 		if a.drawTicks() {
 			h += a.Tick.Length
@@ -233,7 +250,7 @@ func (a horizontalAxis) draw(c draw.Canvas) {
 		y += a.Label.Height(a.Label.Text)
 	}
 
-	marks := a.Tick.Marker.Ticks(a.Min, a.Max)
+	marks := a.CreateHorizontalMarks(c)
 	ticklabelheight := tickLabelHeight(a.Tick.Label, marks)
 	for _, t := range marks {
 		x := c.X(a.Norm(t.Value))
@@ -266,9 +283,9 @@ func (a horizontalAxis) draw(c draw.Canvas) {
 }
 
 // GlyphBoxes returns the GlyphBoxes for the tick labels.
-func (a horizontalAxis) GlyphBoxes(*Plot) []GlyphBox {
+func (a horizontalAxis) GlyphBoxes(p *Plot, c draw.Canvas) []GlyphBox {
 	var boxes []GlyphBox
-	for _, t := range a.Tick.Marker.Ticks(a.Min, a.Max) {
+	for _, t := range a.CreateHorizontalMarks(c) {
 		if t.IsMinor() {
 			continue
 		}
@@ -287,13 +304,13 @@ type verticalAxis struct {
 }
 
 // size returns the width of the axis.
-func (a verticalAxis) size() (w vg.Length) {
+func (a verticalAxis) size(c draw.Canvas) (w vg.Length) {
 	if a.Label.Text != "" { // We assume that the label isn't rotated.
 		w -= a.Label.Font.Extents().Descent
 		w += a.Label.Height(a.Label.Text)
 	}
 
-	marks := a.Tick.Marker.Ticks(a.Min, a.Max)
+	marks := a.CreateVerticalMarks(c)
 	if len(marks) > 0 {
 		if lwidth := tickLabelWidth(a.Tick.Label, marks); lwidth > 0 {
 			w += lwidth
@@ -319,7 +336,7 @@ func (a verticalAxis) draw(c draw.Canvas) {
 		c.FillText(sty, vg.Point{X: x, Y: c.Center().Y}, a.Label.Text)
 		x += -a.Label.Font.Extents().Descent
 	}
-	marks := a.Tick.Marker.Ticks(a.Min, a.Max)
+	marks := a.CreateVerticalMarks(c)
 	if w := tickLabelWidth(a.Tick.Label, marks); len(marks) > 0 && w > 0 {
 		x += w
 	}
@@ -353,9 +370,9 @@ func (a verticalAxis) draw(c draw.Canvas) {
 }
 
 // GlyphBoxes returns the GlyphBoxes for the tick labels
-func (a verticalAxis) GlyphBoxes(*Plot) []GlyphBox {
+func (a verticalAxis) GlyphBoxes(p *Plot, c draw.Canvas) []GlyphBox {
 	var boxes []GlyphBox
-	for _, t := range a.Tick.Marker.Ticks(a.Min, a.Max) {
+	for _, t := range a.CreateVerticalMarks(c) {
 		if t.IsMinor() {
 			continue
 		}
@@ -375,7 +392,7 @@ type DefaultTicks struct{}
 var _ Ticker = DefaultTicks{}
 
 // Ticks returns Ticks in the specified range.
-func (DefaultTicks) Ticks(min, max float64) []Tick {
+func (DefaultTicks) Ticks(min, max float64, stringSizer StringSizer, axisSize vg.Length) []Tick {
 	if max <= min {
 		panic("illegal range")
 	}
@@ -471,7 +488,7 @@ type LogTicks struct{}
 var _ Ticker = LogTicks{}
 
 // Ticks returns Ticks in a specified range
-func (LogTicks) Ticks(min, max float64) []Tick {
+func (LogTicks) Ticks(min, max float64, stringSizer StringSizer, axisSize vg.Length) []Tick {
 	if min <= 0 || max <= 0 {
 		panic("Values must be greater than 0 for a log scale.")
 	}
@@ -500,7 +517,7 @@ type ConstantTicks []Tick
 var _ Ticker = ConstantTicks{}
 
 // Ticks returns Ticks in a specified range
-func (ts ConstantTicks) Ticks(float64, float64) []Tick {
+func (ts ConstantTicks) Ticks(min, max float64, stringSizer StringSizer, axisSize vg.Length) []Tick {
 	return ts
 }
 
@@ -532,7 +549,7 @@ type TimeTicks struct {
 var _ Ticker = TimeTicks{}
 
 // Ticks implements plot.Ticker.
-func (t TimeTicks) Ticks(min, max float64) []Tick {
+func (t TimeTicks) Ticks(min, max float64, stringSizer StringSizer, axisSize vg.Length) []Tick {
 	if t.Ticker == nil {
 		t.Ticker = DefaultTicks{}
 	}
@@ -543,7 +560,7 @@ func (t TimeTicks) Ticks(min, max float64) []Tick {
 		t.Time = UTCUnixTime
 	}
 
-	ticks := t.Ticker.Ticks(min, max)
+	ticks := t.Ticker.Ticks(min, max, stringSizer, axisSize)
 	for i := range ticks {
 		tick := &ticks[i]
 		if tick.Label == "" {
@@ -626,6 +643,6 @@ type TickerFunc func(min, max float64) []Tick
 var _ Ticker = TickerFunc(nil)
 
 // Ticks implements plot.Ticker.
-func (f TickerFunc) Ticks(min, max float64) []Tick {
+func (f TickerFunc) Ticks(min, max float64, stringSizer StringSizer, axisSize vg.Length) []Tick {
 	return f(min, max)
 }

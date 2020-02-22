@@ -6,6 +6,7 @@ package plotter_test
 
 import (
 	"fmt"
+	"gonum.org/v1/plot/vg"
 	"math"
 	"testing"
 
@@ -43,7 +44,7 @@ func (g offsetUnitGrid) Y(r int) float64 {
 
 type integerTicks struct{}
 
-func (integerTicks) Ticks(min, max float64) []plot.Tick {
+func (integerTicks) Ticks(min, max float64, stringSizer plot.StringSizer, axisLength vg.Length) []plot.Tick {
 	var t []plot.Tick
 	for i := math.Trunc(min); i <= max; i++ {
 		t = append(t, plot.Tick{Value: i, Label: fmt.Sprint(i)})
