@@ -10,8 +10,8 @@ import (
 	"strconv"
 	"time"
 
-	"gonum.org/v1/plot/vg"
-	"gonum.org/v1/plot/vg/draw"
+	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/plot/vg/draw"
 )
 
 // StringSizer returns the width of the given string.

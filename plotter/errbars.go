@@ -7,9 +7,9 @@ package plotter
 import (
 	"math"
 
-	"gonum.org/v1/plot"
-	"gonum.org/v1/plot/vg"
-	"gonum.org/v1/plot/vg/draw"
+	"github.com/hneemann/plot"
+	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/plot/vg/draw"
 )
 
 // DefaultCapWidth is the default width of error bar caps.

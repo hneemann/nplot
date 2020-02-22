@@ -5,8 +5,8 @@
 package draw_test
 
 import (
-	"gonum.org/v1/plot/vg"
-	"gonum.org/v1/plot/vg/draw"
+	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/plot/vg/draw"
 )
 
 // SplitVertical returns the lower and upper portions of c after

@@ -14,12 +14,12 @@ import (
 	"sync"
 	"testing"
 
-	"gonum.org/v1/plot"
-	"gonum.org/v1/plot/cmpimg"
-	"gonum.org/v1/plot/plotter"
-	"gonum.org/v1/plot/vg"
-	"gonum.org/v1/plot/vg/draw"
-	"gonum.org/v1/plot/vg/vgimg"
+	"github.com/hneemann/plot"
+	"github.com/hneemann/plot/cmpimg"
+	"github.com/hneemann/plot/plotter"
+	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/plot/vg/vgimg"
 )
 
 func TestIssue179(t *testing.T) {

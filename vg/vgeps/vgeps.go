@@ -4,7 +4,7 @@
 
 // Package vgeps implements the vg.Canvas interface using
 // encapsulated postscript.
-package vgeps // import "gonum.org/v1/plot/vg/vgeps"
+package vgeps // import "github.com/hneemann/plot/vg/vgeps"
 
 import (
 	"bufio"
@@ -16,7 +16,7 @@ import (
 	"math"
 	"time"
 
-	"gonum.org/v1/plot/vg"
+	"github.com/hneemann/plot/vg"
 )
 
 // DPI is the nominal resolution of drawing in EPS.

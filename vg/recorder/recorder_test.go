@@ -10,7 +10,7 @@ import (
 	"strings"
 	"testing"
 
-	"gonum.org/v1/plot/vg"
+	"github.com/hneemann/plot/vg"
 )
 
 func TestRecorder(t *testing.T) {

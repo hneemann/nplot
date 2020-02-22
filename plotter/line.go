@@ -7,9 +7,9 @@ package plotter
 import (
 	"image/color"
 
-	"gonum.org/v1/plot"
-	"gonum.org/v1/plot/vg"
-	"gonum.org/v1/plot/vg/draw"
+	"github.com/hneemann/plot"
+	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/plot/vg/draw"
 )
 
 // StepKind specifies a form of a connection of two consecutive points.

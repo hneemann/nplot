@@ -9,10 +9,10 @@ import (
 	"log"
 	"math"
 
-	"gonum.org/v1/plot"
-	"gonum.org/v1/plot/palette/moreland"
-	"gonum.org/v1/plot/plotter"
-	"gonum.org/v1/plot/vg"
+	"github.com/hneemann/plot"
+	"github.com/hneemann/plot/palette/moreland"
+	"github.com/hneemann/plot/plotter"
+	"github.com/hneemann/plot/vg"
 )
 
 // ExamplePolygon_holes draws a polygon with holes, showing how

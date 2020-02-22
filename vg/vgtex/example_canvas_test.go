@@ -8,11 +8,11 @@ import (
 	"log"
 	"os"
 
-	"gonum.org/v1/plot"
-	"gonum.org/v1/plot/plotter"
-	"gonum.org/v1/plot/vg"
-	"gonum.org/v1/plot/vg/draw"
-	"gonum.org/v1/plot/vg/vgtex"
+	"github.com/hneemann/plot"
+	"github.com/hneemann/plot/plotter"
+	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/plot/vg/vgtex"
 )
 
 // An example of making a LaTeX plot.
