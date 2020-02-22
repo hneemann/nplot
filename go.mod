@@ -10,6 +10,5 @@ require (
 	golang.org/x/exp v0.0.0-20180807140117-3d87b88a115f
 	golang.org/x/image v0.0.0-20180708004352-c73c2afc3b81
 	gonum.org/v1/gonum v0.0.0-20180816165407-929014505bf4
-	gonum.org/v1/plot v0.0.0-20200212202559-4d97eda4de95
 	rsc.io/pdf v0.1.1
 )
