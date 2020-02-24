@@ -32,7 +32,8 @@ type incrementer struct {
 }
 
 var incrementerList = []incrementer{
-	{daily, normTime},
+	{daily(1), normTime},
+	{daily(2), normDay},
 	{weekly, normDay},
 	{twoWeekly, normDay},
 	{monthly(1), normDay},
@@ -72,13 +73,14 @@ func normTime(t time.Time) time.Time {
 	return time.Date(y, m, d, 0, 0, 0, 0, t.Location())
 }
 
-func daily(t time.Time) time.Time {
-	y := t.Year()
-	m := t.Month()
-	d := t.Day()
-	return time.Date(y, m, d+1, 0, 0, 0, 0, t.Location())
+func daily(days int) dateModifier {
+	return func(t time.Time) time.Time {
+		y := t.Year()
+		m := t.Month()
+		d := t.Day()
+		return time.Date(y, m, d+days, 0, 0, 0, 0, t.Location())
+	}
 }
-
 func weekly(t time.Time) time.Time {
 	y := t.Year()
 	m := t.Month()
