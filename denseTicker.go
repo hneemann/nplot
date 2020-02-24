@@ -48,7 +48,7 @@ func (mt *DenseTicks) Ticks(min, max float64, stringSizer StringSizer, axisSize 
 
 	nks := mt.getNks()
 	ticks := []Tick{}
-	for startTick < max+mt.stepWidth/2 {
+	for startTick <= max {
 		ticks = append(ticks, Tick{
 			Value: startTick,
 			Label: strconv.FormatFloat(startTick, 'f', nks, 64),
@@ -62,11 +62,11 @@ func (mt *DenseTicks) Ticks(min, max float64, stringSizer StringSizer, axisSize 
 const ZEROS = "0000000000000000000000000000000000000000000000000000000000000000000000000"
 
 func (mt *DenseTicks) checkTextWidth(size vg.Length, vks, nks int, stringSizer StringSizer) bool {
-	s := ZEROS[:vks+1] // space for a additional character
+	s := ZEROS[:vks]
 	if nks > 0 {
 		s += "." + ZEROS[:nks]
 	}
-	width := stringSizer(s)
+	width := stringSizer(s) + stringSizer("0")
 	return size > width
 }
 
