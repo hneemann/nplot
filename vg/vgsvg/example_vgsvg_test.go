@@ -7,17 +7,17 @@ package vgsvg_test
 import (
 	"log"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
 )
 
 func Example() {
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
-		log.Fatalf("could not create plot: %v", err)
+		log.Fatalf("could not create nplot: %v", err)
 	}
-	p.Title.Text = "Scatter plot"
+	p.Title.Text = "Scatter nplot"
 	p.X.Label.Text = "X"
 	p.Y.Label.Text = "Y"
 
@@ -29,6 +29,6 @@ func Example() {
 
 	err = p.Save(5*vg.Centimeter, 5*vg.Centimeter, "testdata/scatter.svg")
 	if err != nil {
-		log.Fatalf("could not save SVG plot: %v", err)
+		log.Fatalf("could not save SVG nplot: %v", err)
 	}
 }

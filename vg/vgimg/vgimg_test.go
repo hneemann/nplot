@@ -14,12 +14,12 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/cmpimg"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
-	"github.com/hneemann/plot/vg/vgimg"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/cmpimg"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
+	"github.com/hneemann/nplot/vg/vgimg"
 )
 
 func TestIssue179(t *testing.T) {
@@ -27,7 +27,7 @@ func TestIssue179(t *testing.T) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -92,7 +92,7 @@ func TestUseBackgroundColor(t *testing.T) {
 }
 
 func TestIssue540(t *testing.T) {
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package plot
+package nplot
 
 import (
 	"image/color"
@@ -10,8 +10,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 // StringSizer returns the width of the given string.
@@ -32,7 +32,7 @@ type Normalizer interface {
 }
 
 // An Axis represents either a horizontal or vertical
-// axis of a plot.
+// axis of a nplot.
 type Axis struct {
 	// Min and Max are the minimum and maximum data
 	// values represented by the axis.
@@ -216,7 +216,7 @@ func (a Axis) drawTicks() bool {
 }
 
 // A horizontalAxis draws horizontally across the bottom
-// of a plot.
+// of a nplot.
 type horizontalAxis struct {
 	Axis
 }
@@ -298,7 +298,7 @@ func (a horizontalAxis) GlyphBoxes(p *Plot, c draw.Canvas) []GlyphBox {
 	return boxes
 }
 
-// A verticalAxis is drawn vertically up the left side of a plot.
+// A verticalAxis is drawn vertically up the left side of a nplot.
 type verticalAxis struct {
 	Axis
 }
@@ -548,7 +548,7 @@ type TimeTicks struct {
 
 var _ Ticker = TimeTicks{}
 
-// Ticks implements plot.Ticker.
+// Ticks implements nplot.Ticker.
 func (t TimeTicks) Ticks(min, max float64, stringSizer StringSizer, axisSize vg.Length) []Tick {
 	if t.Ticker == nil {
 		t.Ticker = DefaultTicks{}
@@ -642,7 +642,7 @@ type TickerFunc func(min, max float64) []Tick
 
 var _ Ticker = TickerFunc(nil)
 
-// Ticks implements plot.Ticker.
+// Ticks implements nplot.Ticker.
 func (f TickerFunc) Ticks(min, max float64, stringSizer StringSizer, axisSize vg.Length) []Tick {
 	return f(min, max)
 }

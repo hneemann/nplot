@@ -13,11 +13,11 @@ import (
 
 	"golang.org/x/exp/rand"
 
-	"github.com/hneemann/plot"
-	_ "github.com/hneemann/plot/gob"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot"
+	_ "github.com/hneemann/nplot/gob"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 func init() {
@@ -33,9 +33,9 @@ func TestPersistency(t *testing.T) {
 	lineData := randomPoints(n, rnd)
 	linePointsData := randomPoints(n, rnd)
 
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
-		t.Fatalf("error creating plot: %v\n", err)
+		t.Fatalf("error creating nplot: %v\n", err)
 	}
 
 	p.Title.Text = "Plot Example"
@@ -72,14 +72,14 @@ func TestPersistency(t *testing.T) {
 	lpPoints.Shape = draw.PyramidGlyph{}
 	lpPoints.Color = color.RGBA{R: 255, A: 255}
 
-	// Add the plotters to the plot, with a legend
+	// Add the plotters to the nplot, with a legend
 	// entry for each
 	p.Add(s, l, lpLine, lpPoints)
 	p.Legend.Add("scatter", s)
 	p.Legend.Add("line", l)
 	p.Legend.Add("line points", lpLine, lpPoints)
 
-	// Save the plot to a PNG file.
+	// Save the nplot to a PNG file.
 	err = p.Save(4, 4, "test-persistency.png")
 	if err != nil {
 		t.Fatalf("error saving to PNG: %v\n", err)
@@ -90,18 +90,18 @@ func TestPersistency(t *testing.T) {
 	enc := gob.NewEncoder(buf)
 	err = enc.Encode(p)
 	if err != nil {
-		t.Fatalf("error gob-encoding plot: %v\n", err)
+		t.Fatalf("error gob-encoding nplot: %v\n", err)
 	}
 
-	// TODO(sbinet): impl. BinaryMarshal for plot.Plot and vg.Font
+	// TODO(sbinet): impl. BinaryMarshal for nplot.Plot and vg.Font
 	// {
 	// 	dec := gob.NewDecoder(buf)
-	// 	var p plot.Plot
+	// 	var p nplot.Plot
 	// 	err = dec.Decode(&p)
 	// 	if err != nil {
-	// 		t.Fatalf("error gob-decoding plot: %v\n", err)
+	// 		t.Fatalf("error gob-decoding nplot: %v\n", err)
 	// 	}
-	// 	// Save the plot to a PNG file.
+	// 	// Save the nplot to a PNG file.
 	// 	err = p.Save(4, 4, "test-persistency-readback.png")
 	// 	if err != nil {
 	// 		t.Fatalf("error saving to PNG: %v\n", err)
@@ -129,8 +129,8 @@ func randomPoints(n int, rnd *rand.Rand) plotter.XYs {
 // into the labels for the major tick marks.
 type commaTicks struct{}
 
-func (commaTicks) Ticks(min, max float64, sizer plot.StringSizer, axisSize vg.Length) []plot.Tick {
-	tks := plot.DefaultTicks{}.Ticks(min, max, sizer, axisSize)
+func (commaTicks) Ticks(min, max float64, sizer nplot.StringSizer, axisSize vg.Length) []nplot.Tick {
+	tks := nplot.DefaultTicks{}.Ticks(min, max, sizer, axisSize)
 	for i, t := range tks {
 		if t.Label == "" { // Skip minor ticks, they are fine.
 			continue

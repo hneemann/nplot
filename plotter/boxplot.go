@@ -9,16 +9,16 @@ import (
 	"math"
 	"sort"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 // fiveStatPlot contains the shared fields for quartile
 // and box-whisker plots.
 type fiveStatPlot struct {
 	// Values is a copy of the values of the values used to
-	// create this box plot.
+	// create this box nplot.
 	Values
 
 	// Location is the location of the box along its axis.
@@ -81,7 +81,7 @@ type BoxPlot struct {
 
 // NewBoxPlot returns a new BoxPlot that represents
 // the distribution of the given values.  The style of
-// the box plot is that used for Tukey's schematic
+// the box nplot is that used for Tukey's schematic
 // plots is ``Exploratory Data Analysis.''
 //
 // An error is returned if the boxplot is created with
@@ -186,7 +186,7 @@ func median(vs Values) float64 {
 }
 
 // Plot draws the BoxPlot on Canvas c and Plot plt.
-func (b *BoxPlot) Plot(c draw.Canvas, plt *plot.Plot) {
+func (b *BoxPlot) Plot(c draw.Canvas, plt *nplot.Plot) {
 	if b.Horizontal {
 		b := &horizBoxPlot{b}
 		b.Plot(c, plt)
@@ -237,7 +237,7 @@ func (b *BoxPlot) Plot(c draw.Canvas, plt *plot.Plot) {
 }
 
 // DataRange returns the minimum and maximum x
-// and y values, implementing the plot.DataRanger
+// and y values, implementing the nplot.DataRanger
 // interface.
 func (b *BoxPlot) DataRange() (float64, float64, float64, float64) {
 	if b.Horizontal {
@@ -249,14 +249,14 @@ func (b *BoxPlot) DataRange() (float64, float64, float64, float64) {
 
 // GlyphBoxes returns a slice of GlyphBoxes for the
 // points and for the median line of the boxplot,
-// implementing the plot.GlyphBoxer interface
-func (b *BoxPlot) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
+// implementing the nplot.GlyphBoxer interface
+func (b *BoxPlot) GlyphBoxes(plt *nplot.Plot) []nplot.GlyphBox {
 	if b.Horizontal {
 		b := &horizBoxPlot{b}
 		return b.GlyphBoxes(plt)
 	}
 
-	bs := make([]plot.GlyphBox, len(b.Outside)+1)
+	bs := make([]nplot.GlyphBox, len(b.Outside)+1)
 	for i, out := range b.Outside {
 		bs[i].X = plt.X.Norm(b.Location)
 		bs[i].Y = plt.Y.Norm(b.Value(out))
@@ -271,10 +271,10 @@ func (b *BoxPlot) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	return bs
 }
 
-// OutsideLabels returns a *Labels that will plot
+// OutsideLabels returns a *Labels that will nplot
 // a label for each of the outside points.  The
 // labels are assumed to correspond to the
-// points used to create the box plot.
+// points used to create the box nplot.
 func (b *BoxPlot) OutsideLabels(labels Labeller) (*Labels, error) {
 	if b.Horizontal {
 		b := &horizBoxPlot{b}
@@ -318,7 +318,7 @@ func (o boxPlotOutsideLabels) Label(i int) string {
 // bar charts.
 type horizBoxPlot struct{ *BoxPlot }
 
-func (b horizBoxPlot) Plot(c draw.Canvas, plt *plot.Plot) {
+func (b horizBoxPlot) Plot(c draw.Canvas, plt *nplot.Plot) {
 	trX, trY := plt.Transforms(&c)
 	y := trY(b.Location)
 	if !c.ContainsY(y) {
@@ -363,7 +363,7 @@ func (b horizBoxPlot) Plot(c draw.Canvas, plt *plot.Plot) {
 }
 
 // DataRange returns the minimum and maximum x
-// and y values, implementing the plot.DataRanger
+// and y values, implementing the nplot.DataRanger
 // interface.
 func (b horizBoxPlot) DataRange() (float64, float64, float64, float64) {
 	return b.Min, b.Max, b.Location, b.Location
@@ -371,9 +371,9 @@ func (b horizBoxPlot) DataRange() (float64, float64, float64, float64) {
 
 // GlyphBoxes returns a slice of GlyphBoxes for the
 // points and for the median line of the boxplot,
-// implementing the plot.GlyphBoxer interface
-func (b horizBoxPlot) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
-	bs := make([]plot.GlyphBox, len(b.Outside)+1)
+// implementing the nplot.GlyphBoxer interface
+func (b horizBoxPlot) GlyphBoxes(plt *nplot.Plot) []nplot.GlyphBox {
+	bs := make([]nplot.GlyphBox, len(b.Outside)+1)
 	for i, out := range b.Outside {
 		bs[i].X = plt.X.Norm(b.Value(out))
 		bs[i].Y = plt.Y.Norm(b.Location)
@@ -388,10 +388,10 @@ func (b horizBoxPlot) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	return bs
 }
 
-// OutsideLabels returns a *Labels that will plot
+// OutsideLabels returns a *Labels that will nplot
 // a label for each of the outside points.  The
 // labels are assumed to correspond to the
-// points used to create the box plot.
+// points used to create the box nplot.
 func (b *horizBoxPlot) OutsideLabels(labels Labeller) (*Labels, error) {
 	strs := make([]string, len(b.Outside))
 	for i, out := range b.Outside {

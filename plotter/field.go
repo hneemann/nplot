@@ -7,9 +7,9 @@ package plotter
 import (
 	"math"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 // FieldXY describes a two dimensional vector field where the
@@ -84,8 +84,8 @@ func NewField(f FieldXY) *Field {
 	}
 }
 
-// Plot implements the Plot method of the plot.Plotter interface.
-func (f *Field) Plot(c draw.Canvas, plt *plot.Plot) {
+// Plot implements the Plot method of the nplot.Plotter interface.
+func (f *Field) Plot(c draw.Canvas, plt *nplot.Plot) {
 	c.Push()
 	defer c.Pop()
 	c.SetLineStyle(f.LineStyle)
@@ -173,7 +173,7 @@ func drawVector(c vg.Canvas, v XY) {
 }
 
 // DataRange implements the DataRange method
-// of the plot.DataRanger interface.
+// of the nplot.DataRanger interface.
 func (f *Field) DataRange() (xmin, xmax, ymin, ymax float64) {
 	c, r := f.FieldXY.Dims()
 	switch c {
@@ -196,13 +196,13 @@ func (f *Field) DataRange() (xmin, xmax, ymin, ymax float64) {
 }
 
 // GlyphBoxes implements the GlyphBoxes method
-// of the plot.GlyphBoxer interface.
-func (f *Field) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
+// of the nplot.GlyphBoxer interface.
+func (f *Field) GlyphBoxes(plt *nplot.Plot) []nplot.GlyphBox {
 	c, r := f.FieldXY.Dims()
-	b := make([]plot.GlyphBox, 0, r*c)
+	b := make([]nplot.GlyphBox, 0, r*c)
 	for i := 0; i < c; i++ {
 		for j := 0; j < r; j++ {
-			b = append(b, plot.GlyphBox{
+			b = append(b, nplot.GlyphBox{
 				X: plt.X.Norm(f.FieldXY.X(i)),
 				Y: plt.Y.Norm(f.FieldXY.Y(j)),
 				Rectangle: vg.Rectangle{

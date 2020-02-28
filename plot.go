@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package plot
+package nplot
 
 import (
 	"image/color"
@@ -12,40 +12,40 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 var (
-	// DefaultFont is the name of the default font for plot text.
+	// DefaultFont is the name of the default font for nplot text.
 	DefaultFont = "Times-Roman"
 )
 
-// Plot is the basic type representing a plot.
+// Plot is the basic type representing a nplot.
 type Plot struct {
 	Title struct {
-		// Text is the text of the plot title.  If
-		// Text is the empty string then the plot
+		// Text is the text of the nplot title.  If
+		// Text is the empty string then the nplot
 		// will not have a title.
 		Text string
 
 		// Padding is the amount of padding
 		// between the bottom of the title and
-		// the top of the plot.
+		// the top of the nplot.
 		Padding vg.Length
 
 		draw.TextStyle
 	}
 
-	// BackgroundColor is the background color of the plot.
+	// BackgroundColor is the background color of the nplot.
 	// The default is White.
 	BackgroundColor color.Color
 
 	// X and Y are the horizontal and vertical axes
-	// of the plot respectively.
+	// of the nplot respectively.
 	X, Y Axis
 
-	// Legend is the plot's legend.
+	// Legend is the nplot's legend.
 	Legend Legend
 
 	// plotters are drawn by calling their Plot method
@@ -55,7 +55,7 @@ type Plot struct {
 
 // Plotter is an interface that wraps the Plot method.
 // Some standard implementations of Plotter can be
-// found in the gonum.org/v1/plot/plotter
+// found in the gonum.org/v1/nplot/plotter
 // package, documented here:
 // https://godoc.org/gonum.org/v1/plot/plotter
 type Plotter interface {
@@ -74,7 +74,7 @@ const (
 	horizontal = false
 )
 
-// New returns a new plot with some reasonable
+// New returns a new nplot with some reasonable
 // default settings.
 func New() (*Plot, error) {
 	titleFont, err := vg.MakeFont(DefaultFont, 12)
@@ -108,15 +108,15 @@ func New() (*Plot, error) {
 	return p, nil
 }
 
-// Add adds a Plotters to the plot.
+// Add adds a Plotters to the nplot.
 //
 // If the plotters implements DataRanger then the
 // minimum and maximum values of the X and Y
 // axes are changed if necessary to fit the range of
 // the data.
 //
-// When drawing the plot, Plotters are drawn in the
-// order in which they were added to the plot.
+// When drawing the nplot, Plotters are drawn in the
+// order in which they were added to the nplot.
 func (p *Plot) Add(ps ...Plotter) {
 	for _, d := range ps {
 		if x, ok := d.(DataRanger); ok {
@@ -131,12 +131,12 @@ func (p *Plot) Add(ps ...Plotter) {
 	p.plotters = append(p.plotters, ps...)
 }
 
-// Draw draws a plot to a draw.Canvas.
+// Draw draws a nplot to a draw.Canvas.
 //
 // Plotters are drawn in the order in which they were
-// added to the plot.  Plotters that  implement the
+// added to the nplot.  Plotters that  implement the
 // GlyphBoxer interface will have their GlyphBoxes
-// taken into account when padding the plot so that
+// taken into account when padding the nplot so that
 // none of their glyphs are clipped.
 func (p *Plot) Draw(c draw.Canvas) {
 	if p.BackgroundColor != nil {
@@ -170,7 +170,7 @@ func (p *Plot) Draw(c draw.Canvas) {
 
 // DataCanvas returns a new draw.Canvas that
 // is the subset of the given draw area into which
-// the plot data will be drawn.
+// the nplot data will be drawn.
 func (p *Plot) DataCanvas(da draw.Canvas) draw.Canvas {
 	if p.Title.Text != "" {
 		da.Max.Y -= p.Title.Height(p.Title.Text) - p.Title.Font.Extents().Descent
@@ -183,7 +183,7 @@ func (p *Plot) DataCanvas(da draw.Canvas) draw.Canvas {
 	return padY(p, padX(p, draw.Crop(da, y.size(da), 0, x.size(da), 0)))
 }
 
-// DrawGlyphBoxes draws red outlines around the plot's
+// DrawGlyphBoxes draws red outlines around the nplot's
 // GlyphBoxes.  This is intended for debugging.
 func (p *Plot) DrawGlyphBoxes(c *draw.Canvas) {
 	c.SetColor(color.RGBA{R: 255, A: 255})
@@ -322,7 +322,7 @@ func (p *Plot) Transforms(c *draw.Canvas) (x, y func(float64) vg.Length) {
 // their glyphs are not clipped if drawn near the
 // edge of the draw.Canvas.
 //
-// When computing padding, the plot ignores
+// When computing padding, the nplot ignores
 // GlyphBoxes as follows:
 // If the Size.X > 0 and the X value is not in range
 // of the X axis then the box is ignored.
@@ -358,7 +358,7 @@ type GlyphBox struct {
 	vg.Rectangle
 }
 
-// GlyphBoxes returns the GlyphBoxes for all plot
+// GlyphBoxes returns the GlyphBoxes for all nplot
 // data that meet the GlyphBoxer interface.
 func (p *Plot) GlyphBoxes(*Plot) (boxes []GlyphBox) {
 	for _, d := range p.plotters {
@@ -379,7 +379,7 @@ func (p *Plot) GlyphBoxes(*Plot) (boxes []GlyphBox) {
 	return
 }
 
-// NominalX configures the plot to have a nominal X
+// NominalX configures the nplot to have a nominal X
 // axis—an X axis with names instead of numbers.  The
 // X location corresponding to each name are the integers,
 // e.g., the x value 0 is centered above the first name and
@@ -431,7 +431,7 @@ func (p *Plot) NominalY(names ...string) {
 	p.Y.Tick.Marker = ConstantTicks(ticks)
 }
 
-// WriterTo returns an io.WriterTo that will write the plot as
+// WriterTo returns an io.WriterTo that will write the nplot as
 // the specified image format.
 //
 // Supported formats are:
@@ -446,7 +446,7 @@ func (p *Plot) WriterTo(w, h vg.Length, format string) (io.WriterTo, error) {
 	return c, nil
 }
 
-// Save saves the plot to an image file.  The file format is determined
+// Save saves the nplot to an image file.  The file format is determined
 // by the extension.
 //
 // Supported extensions are:

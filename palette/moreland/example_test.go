@@ -10,14 +10,14 @@ import (
 	"os"
 	"testing"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/cmpimg"
-	"github.com/hneemann/plot/palette"
-	"github.com/hneemann/plot/palette/moreland"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
-	"github.com/hneemann/plot/vg/vgimg"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/cmpimg"
+	"github.com/hneemann/nplot/palette"
+	"github.com/hneemann/nplot/palette/moreland"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
+	"github.com/hneemann/nplot/vg/vgimg"
 	"gonum.org/v1/gonum/mat"
 )
 
@@ -119,7 +119,7 @@ func Example() {
 
 		h := plotter.NewHeatMap(m, plte.cmap)
 
-		p, err := plot.New()
+		p, err := nplot.New()
 		if err != nil {
 			log.Panic(err)
 		}

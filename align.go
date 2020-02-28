@@ -2,14 +2,14 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package plot
+package nplot
 
 import (
 	"fmt"
 	"math"
 
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 // Align returns a two-dimensional row-major array of Canvases which will
@@ -21,13 +21,13 @@ func Align(plots [][]*Plot, t draw.Tiles, dc draw.Canvas) [][]draw.Canvas {
 	o := make([][]draw.Canvas, len(plots))
 
 	if len(plots) != t.Rows {
-		panic(fmt.Errorf("plot: plots rows (%d) != tiles rows (%d)", len(plots), t.Rows))
+		panic(fmt.Errorf("nplot: plots rows (%d) != tiles rows (%d)", len(plots), t.Rows))
 	}
 
 	// Create the initial tiles.
 	for j := 0; j < t.Rows; j++ {
 		if len(plots[j]) != t.Cols {
-			panic(fmt.Errorf("plot: plots row %d columns (%d) != tiles columns (%d)", j, len(plots[j]), t.Rows))
+			panic(fmt.Errorf("nplot: plots row %d columns (%d) != tiles columns (%d)", j, len(plots[j]), t.Rows))
 		}
 
 		o[j] = make([]draw.Canvas, len(plots[j]))

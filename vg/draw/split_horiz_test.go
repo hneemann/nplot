@@ -5,8 +5,8 @@
 package draw_test
 
 import (
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 // SplitHorizontal returns the left and right portions of c after splitting it

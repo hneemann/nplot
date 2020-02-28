@@ -1,7 +1,7 @@
-package plot
+package nplot
 
 import (
-	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/nplot/vg"
 	"time"
 )
 

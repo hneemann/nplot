@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package plot_test
+package nplot_test
 
 import (
 	"bytes"
@@ -13,20 +13,20 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
-	"github.com/hneemann/plot/vg/recorder"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
+	"github.com/hneemann/nplot/vg/recorder"
 )
 
 func TestLegendAlignment(t *testing.T) {
 	const fontSize = 10.189054726368159 // This font size gives an entry height of 10.
-	font, err := vg.MakeFont(plot.DefaultFont, fontSize)
+	font, err := vg.MakeFont(nplot.DefaultFont, fontSize)
 	if err != nil {
 		t.Fatalf("failed to create font: %v", err)
 	}
-	l := plot.Legend{
+	l := nplot.Legend{
 		ThumbnailWidth: vg.Points(20),
 		TextStyle:      draw.TextStyle{Font: font},
 	}
@@ -52,7 +52,7 @@ func TestLegendAlignment(t *testing.T) {
 
 	// want is a snapshot of the actions for the code above when the
 	// graphical output has been visually confirmed to be correct for
-	// the bar charts example show in gonum/plot#25.
+	// the bar charts example show in gonum/nplot#25.
 	want := []recorder.Action{
 		&recorder.SetColor{
 			Color: color.Gray16{},
@@ -243,9 +243,9 @@ func TestIssue514(t *testing.T) {
 			go func() {
 				defer close(done)
 
-				p, err := plot.New()
+				p, err := nplot.New()
 				if err != nil {
-					t.Fatalf("could not create plot: %v", err)
+					t.Fatalf("could not create nplot: %v", err)
 				}
 
 				var (
@@ -280,7 +280,7 @@ func TestIssue514(t *testing.T) {
 			select {
 			case <-done:
 			case <-timeout.C:
-				t.Fatalf("could not create plot with small axis range within allotted time")
+				t.Fatalf("could not create nplot with small axis range within allotted time")
 			}
 		})
 	}

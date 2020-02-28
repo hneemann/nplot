@@ -25,7 +25,7 @@ func goldenPath(path string) string {
 	return noext + "_golden" + ext
 }
 
-// CheckPlot checks a generated plot against a previously created reference.
+// CheckPlot checks a generated nplot against a previously created reference.
 // If generateTestData = true, it regenerates the reference.
 // For image.Image formats, a base64 encoded png representation is output to
 // the testing log when a difference is identified.

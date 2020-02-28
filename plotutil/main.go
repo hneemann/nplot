@@ -9,14 +9,14 @@ package main
 import (
 	"golang.org/x/exp/rand"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/plotutil"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/plotutil"
 )
 
 var examples = []struct {
 	name   string
-	mkplot func() *plot.Plot
+	mkplot func() *nplot.Plot
 }{
 	{"example_errpoints", Example_errpoints},
 	{"example_stackedAreaChart", Example_stackedAreaChart},
@@ -33,44 +33,44 @@ func main() {
 	}
 }
 
-func drawEps(name string, mkplot func() *plot.Plot) {
+func drawEps(name string, mkplot func() *nplot.Plot) {
 	if err := mkplot().Save(4, 4, name+".eps"); err != nil {
 		panic(err)
 	}
 }
 
-func drawPdf(name string, mkplot func() *plot.Plot) {
+func drawPdf(name string, mkplot func() *nplot.Plot) {
 	if err := mkplot().Save(4, 4, name+".pdf"); err != nil {
 		panic(err)
 	}
 }
 
-func drawSvg(name string, mkplot func() *plot.Plot) {
+func drawSvg(name string, mkplot func() *nplot.Plot) {
 	if err := mkplot().Save(4, 4, name+".svg"); err != nil {
 		panic(err)
 	}
 }
 
-func drawPng(name string, mkplot func() *plot.Plot) {
+func drawPng(name string, mkplot func() *nplot.Plot) {
 	if err := mkplot().Save(4, 4, name+".png"); err != nil {
 		panic(err)
 	}
 }
 
-func drawTiff(name string, mkplot func() *plot.Plot) {
+func drawTiff(name string, mkplot func() *nplot.Plot) {
 	if err := mkplot().Save(4, 4, name+".tiff"); err != nil {
 		panic(err)
 	}
 }
 
-func drawJpg(name string, mkplot func() *plot.Plot) {
+func drawJpg(name string, mkplot func() *nplot.Plot) {
 	if err := mkplot().Save(4, 4, name+".jpg"); err != nil {
 		panic(err)
 	}
 }
 
 // Example_errpoints draws some error points.
-func Example_errpoints() *plot.Plot {
+func Example_errpoints() *nplot.Plot {
 	rnd := rand.New(rand.NewSource(1))
 
 	// Get some random data.
@@ -86,7 +86,7 @@ func Example_errpoints() *plot.Plot {
 		}
 	}
 
-	plt, err := plot.New()
+	plt, err := nplot.New()
 	if err != nil {
 		panic(err)
 	}
@@ -124,8 +124,8 @@ func (n stackValues) Value(i int) float64 {
 }
 
 // An example of making a stacked area chart.
-func Example_stackedAreaChart() *plot.Plot {
-	p, err := plot.New()
+func Example_stackedAreaChart() *nplot.Plot {
+	p, err := nplot.New()
 	if err != nil {
 		panic(err)
 	}

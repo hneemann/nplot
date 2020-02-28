@@ -5,9 +5,9 @@
 package plotter
 
 import (
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 // Function implements the Plotter interface,
@@ -36,7 +36,7 @@ func NewFunction(f func(float64) float64) *Function {
 
 // Plot implements the Plotter interface, drawing a line
 // that connects each point in the Line.
-func (f *Function) Plot(c draw.Canvas, p *plot.Plot) {
+func (f *Function) Plot(c draw.Canvas, p *nplot.Plot) {
 	trX, trY := p.Transforms(&c)
 
 	min, max := f.XMin, f.XMax

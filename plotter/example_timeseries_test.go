@@ -11,10 +11,10 @@ import (
 
 	"golang.org/x/exp/rand"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 // Example_timeSeries draws a time series.
@@ -22,7 +22,7 @@ func Example_timeSeries() {
 	rnd := rand.New(rand.NewSource(1))
 
 	// xticks defines how we convert and display time.Time values.
-	xticks := plot.TimeTicks{Format: "2006-01-02\n15:04"}
+	xticks := nplot.TimeTicks{Format: "2006-01-02\n15:04"}
 
 	// randomPoints returns some random x, y points
 	// with some interesting kind of trend.
@@ -47,7 +47,7 @@ func Example_timeSeries() {
 	n := 10
 	data := randomPoints(n)
 
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}

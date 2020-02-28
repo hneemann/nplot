@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 // Package recorder provides support for vector graphics serialization.
-package recorder // import "github.com/hneemann/plot/vg/recorder"
+package recorder // import "github.com/hneemann/nplot/vg/recorder"
 
 import (
 	"bytes"
@@ -14,7 +14,7 @@ import (
 	"image/png"
 	"runtime"
 
-	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/nplot/vg"
 )
 
 var _ vg.Canvas = (*Canvas)(nil)

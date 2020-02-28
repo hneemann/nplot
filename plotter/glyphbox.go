@@ -7,13 +7,13 @@ package plotter
 import (
 	"image/color"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 // GlyphBoxes implements the Plotter interface, drawing
-// all of the glyph boxes of the plot.  This is intended for
+// all of the glyph boxes of the nplot.  This is intended for
 // debugging.
 type GlyphBoxes struct {
 	draw.LineStyle
@@ -26,7 +26,7 @@ func NewGlyphBoxes() *GlyphBoxes {
 	return g
 }
 
-func (g GlyphBoxes) Plot(c draw.Canvas, plt *plot.Plot) {
+func (g GlyphBoxes) Plot(c draw.Canvas, plt *nplot.Plot) {
 	for _, b := range plt.GlyphBoxes(plt) {
 		x := c.X(b.X) + b.Rectangle.Min.X
 		y := c.Y(b.Y) + b.Rectangle.Min.Y

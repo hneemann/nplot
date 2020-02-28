@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package draw // import "github.com/hneemann/plot/vg/draw"
+package draw // import "github.com/hneemann/nplot/vg/draw"
 
 import (
 	"fmt"
@@ -10,11 +10,11 @@ import (
 	"math"
 	"strings"
 
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/vgeps"
-	"github.com/hneemann/plot/vg/vgimg"
-	"github.com/hneemann/plot/vg/vgpdf"
-	"github.com/hneemann/plot/vg/vgsvg"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/vgeps"
+	"github.com/hneemann/nplot/vg/vgimg"
+	"github.com/hneemann/nplot/vg/vgpdf"
+	"github.com/hneemann/nplot/vg/vgsvg"
 )
 
 // A Canvas is a vector graphics canvas along with
@@ -83,7 +83,7 @@ type LineStyle struct {
 }
 
 // A GlyphStyle specifies the look of a glyph used to draw
-// a point on a plot.
+// a point on a nplot.
 type GlyphStyle struct {
 	// Color is the color used to draw the glyph.
 	color.Color

@@ -8,16 +8,16 @@ import (
 	"log"
 	"testing"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/cmpimg"
-	"github.com/hneemann/plot/plotter"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/cmpimg"
+	"github.com/hneemann/nplot/plotter"
 )
 
 func TestFloatPrecision(t *testing.T) {
 	const fname = "precision.png"
 
 	cmpimg.CheckPlot(func() {
-		p, err := plot.New()
+		p, err := nplot.New()
 		if err != nil {
 			log.Fatal(err)
 		}

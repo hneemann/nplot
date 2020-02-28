@@ -10,10 +10,10 @@ import (
 	"math"
 	"sort"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/tools/bezier"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/tools/bezier"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 // A Sankey diagram presents stock and flow data as rectangles representing
@@ -53,13 +53,13 @@ type Sankey struct {
 
 	// StockStyle is a function that specifies, for a stock
 	// identified by its label and category, the label text
-	// to be printed on the plot (lbl), the style of the text (ts),
+	// to be printed on the nplot (lbl), the style of the text (ts),
 	// the horizontal and vertical offsets for printing the text (xOff and yOff),
 	// the color of the fill for the bar representing the stock (c),
 	// and the style of the outline of the bar representing the stock (ls).
 	// The default function uses the default TextStyle, color and LineStyle
 	// specified above for all stocks; zero horizontal and vertical offsets;
-	// and the stock label as the text to be printed on the plot.
+	// and the stock label as the text to be printed on the nplot.
 	StockStyle func(label string, category int) (lbl string, ts draw.TextStyle, xOff, yOff vg.Length, c color.Color, ls draw.LineStyle)
 
 	// stocks arranges the stocks by category.
@@ -200,8 +200,8 @@ func NewSankey(flows ...Flow) (*Sankey, error) {
 	return &s, nil
 }
 
-// Plot implements the plot.Plotter interface.
-func (s *Sankey) Plot(c draw.Canvas, plt *plot.Plot) {
+// Plot implements the nplot.Plotter interface.
+func (s *Sankey) Plot(c draw.Canvas, plt *nplot.Plot) {
 	trCat, trVal := plt.Transforms(&c)
 
 	// sourceFlowPlaceholder and receptorFlowPlaceholder track
@@ -362,7 +362,7 @@ func (s *Sankey) bezier(begin, end vg.Point) []vg.Point {
 	return outPts
 }
 
-// DataRange implements the plot.DataRanger interface.
+// DataRange implements the nplot.DataRanger interface.
 func (s *Sankey) DataRange() (xmin, xmax, ymin, ymax float64) {
 	catMin := math.Inf(1)
 	catMax := math.Inf(-1)
@@ -383,12 +383,12 @@ func (s *Sankey) DataRange() (xmin, xmax, ymin, ymax float64) {
 }
 
 // GlyphBoxes implements the GlyphBoxer interface.
-func (s *Sankey) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
+func (s *Sankey) GlyphBoxes(plt *nplot.Plot) []nplot.GlyphBox {
 	stocks := s.stockList()
-	boxes := make([]plot.GlyphBox, 0, len(s.flows)+len(stocks))
+	boxes := make([]nplot.GlyphBox, 0, len(s.flows)+len(stocks))
 
 	for _, stk := range stocks {
-		b1 := plot.GlyphBox{
+		b1 := nplot.GlyphBox{
 			X: plt.X.Norm(float64(stk.category)),
 			Y: plt.Y.Norm((stk.min + stk.max) / 2),
 			Rectangle: vg.Rectangle{
@@ -402,7 +402,7 @@ func (s *Sankey) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 		rect.Max.X += xOff
 		rect.Min.Y += yOff
 		rect.Max.Y += yOff
-		b2 := plot.GlyphBox{
+		b2 := nplot.GlyphBox{
 			X:         plt.X.Norm(float64(stk.category)),
 			Y:         plt.Y.Norm((stk.min + stk.max) / 2),
 			Rectangle: rect,
@@ -415,14 +415,14 @@ func (s *Sankey) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 // Thumbnailers creates a group of objects that can be used to
 // add legend entries for the different flow groups in this
 // diagram, as well as the flow group labels that correspond to them.
-func (s *Sankey) Thumbnailers() (legendLabels []string, thumbnailers []plot.Thumbnailer) {
+func (s *Sankey) Thumbnailers() (legendLabels []string, thumbnailers []nplot.Thumbnailer) {
 	type empty struct{}
 	flowGroups := make(map[string]empty)
 	for _, f := range s.flows {
 		flowGroups[f.Group] = empty{}
 	}
 	legendLabels = make([]string, len(flowGroups))
-	thumbnailers = make([]plot.Thumbnailer, len(flowGroups))
+	thumbnailers = make([]nplot.Thumbnailer, len(flowGroups))
 	i := 0
 	for g := range flowGroups {
 		legendLabels[i] = g
@@ -433,7 +433,7 @@ func (s *Sankey) Thumbnailers() (legendLabels []string, thumbnailers []plot.Thum
 	for i, g := range legendLabels {
 		var thmb sankeyFlowThumbnailer
 		thmb.Color, thmb.LineStyle = s.FlowStyle(g)
-		thumbnailers[i] = plot.Thumbnailer(thmb)
+		thumbnailers[i] = nplot.Thumbnailer(thmb)
 	}
 	return
 }
@@ -445,7 +445,7 @@ type sankeyFlowThumbnailer struct {
 	color.Color
 }
 
-// Thumbnail fulfills the plot.Thumbnailer interface.
+// Thumbnail fulfills the nplot.Thumbnailer interface.
 func (t sankeyFlowThumbnailer) Thumbnail(c *draw.Canvas) {
 	// Here we draw the fill.
 	pts := []vg.Point{

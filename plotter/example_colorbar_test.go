@@ -8,13 +8,13 @@ import (
 	"image/color"
 	"log"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/palette/moreland"
-	"github.com/hneemann/plot/plotter"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/palette/moreland"
+	"github.com/hneemann/nplot/plotter"
 )
 
 func ExampleColorBar_horizontal() {
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}
@@ -33,7 +33,7 @@ func ExampleColorBar_horizontal() {
 
 // This example shows how to create a ColorBar on a log-transformed axis.
 func ExampleColorBar_horizontal_log() {
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}
@@ -48,8 +48,8 @@ func ExampleColorBar_horizontal_log() {
 	p.HideY()
 	p.X.Padding = 0
 	p.Title.Text = "Title"
-	p.X.Scale = plot.LogScale{}
-	p.X.Tick.Marker = plot.LogTicks{}
+	p.X.Scale = nplot.LogScale{}
+	p.X.Tick.Marker = nplot.LogTicks{}
 
 	if err = p.Save(300, 48, "testdata/colorBarHorizontalLog.png"); err != nil {
 		log.Panic(err)
@@ -57,7 +57,7 @@ func ExampleColorBar_horizontal_log() {
 }
 
 func ExampleColorBar_vertical() {
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}

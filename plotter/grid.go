@@ -7,9 +7,9 @@ package plotter
 import (
 	"image/color"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 var (
@@ -20,7 +20,7 @@ var (
 	}
 )
 
-// Grid implements the plot.Plotter interface, drawing
+// Grid implements the nplot.Plotter interface, drawing
 // a set of grid lines at the major tick marks.
 type Grid struct {
 	// Vertical is the style of the vertical lines.
@@ -39,8 +39,8 @@ func NewGrid() *Grid {
 	}
 }
 
-// Plot implements the plot.Plotter interface.
-func (g *Grid) Plot(c draw.Canvas, plt *plot.Plot) {
+// Plot implements the nplot.Plotter interface.
+func (g *Grid) Plot(c draw.Canvas, plt *nplot.Plot) {
 	trX, trY := plt.Transforms(&c)
 
 	var (

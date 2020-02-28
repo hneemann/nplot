@@ -12,15 +12,15 @@ import (
 
 	"golang.org/x/exp/rand"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/palette/moreland"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
-	"github.com/hneemann/plot/vg/vgimg"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/palette/moreland"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
+	"github.com/hneemann/nplot/vg/vgimg"
 )
 
-// ExampleScatter_color draws a colored scatter plot.
+// ExampleScatter_color draws a colored scatter nplot.
 // Each point is plotted with a different color depending on
 // external criteria.
 func ExampleScatter_color() {
@@ -59,7 +59,7 @@ func ExampleScatter_color() {
 	colors.SetMax(maxZ)
 	colors.SetMin(minZ)
 
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}

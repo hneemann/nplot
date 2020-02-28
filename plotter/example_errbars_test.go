@@ -9,9 +9,9 @@ import (
 
 	"golang.org/x/exp/rand"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 // ExampleErrors draws points and error bars.
@@ -54,7 +54,7 @@ func ExampleErrors() {
 		XErrors: plotter.XErrors(randomError(n)),
 	}
 
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}

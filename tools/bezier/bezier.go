@@ -3,9 +3,9 @@
 // license that can be found in the LICENSE file.
 
 // Package bezier implements 2D Bézier curve calculation.
-package bezier // import "github.com/hneemann/plot/tools/bezier"
+package bezier // import "github.com/hneemann/nplot/tools/bezier"
 
-import "github.com/hneemann/plot/vg"
+import "github.com/hneemann/nplot/vg"
 
 type point struct {
 	Point, Control vg.Point

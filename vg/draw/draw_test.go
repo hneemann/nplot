@@ -9,8 +9,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/recorder"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/recorder"
 )
 
 func TestCrop(t *testing.T) {

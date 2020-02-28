@@ -16,14 +16,14 @@
 // For more information see:
 // http://www.personal.psu.edu/cab38/ColorBrewer/ColorBrewer_learnMore.html
 //
-package brewer // import "github.com/hneemann/plot/palette/brewer"
+package brewer // import "github.com/hneemann/nplot/palette/brewer"
 
 import (
 	"errors"
 	"fmt"
 	"image/color"
 
-	"github.com/hneemann/plot/palette"
+	"github.com/hneemann/nplot/palette"
 )
 
 // Color represents a Brewer Palette color.

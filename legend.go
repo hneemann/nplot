@@ -2,17 +2,17 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package plot
+package nplot
 
 import (
 	"math"
 
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 // A Legend gives a description of the meaning of different
-// data elements of the plot.  Each legend entry has a name
+// data elements of the nplot.  Each legend entry has a name
 // and a thumbnail, where the thumbnail shows a small
 // sample of the display style of the corresponding data.
 type Legend struct {
@@ -28,9 +28,9 @@ type Legend struct {
 
 	// Top and Left specify the location of the legend.
 	// If Top is true the legend is located along the top
-	// edge of the plot, otherwise it is located along
+	// edge of the nplot, otherwise it is located along
 	// the bottom edge.  If Left is true then the legend
-	// is located along the left edge of the plot, and the
+	// is located along the left edge of the nplot, and the
 	// text is positioned after the icons, otherwise it is
 	// located along the right edge and the text is
 	// positioned before the icons.
@@ -65,7 +65,7 @@ type Thumbnailer interface {
 	// Thumbnail draws an thumbnail representing
 	// a legend entry.  The thumbnail will usually show
 	// a smaller representation of the style used
-	// to plot the corresponding data.
+	// to nplot the corresponding data.
 	Thumbnail(c *draw.Canvas)
 }
 

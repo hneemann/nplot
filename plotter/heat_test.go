@@ -6,16 +6,16 @@ package plotter_test
 
 import (
 	"fmt"
-	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/nplot/vg"
 	"math"
 	"testing"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/cmpimg"
-	"github.com/hneemann/plot/palette"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg/draw"
-	"github.com/hneemann/plot/vg/vgimg"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/cmpimg"
+	"github.com/hneemann/nplot/palette"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg/draw"
+	"github.com/hneemann/nplot/vg/vgimg"
 	"gonum.org/v1/gonum/mat"
 )
 
@@ -44,10 +44,10 @@ func (g offsetUnitGrid) Y(r int) float64 {
 
 type integerTicks struct{}
 
-func (integerTicks) Ticks(min, max float64, stringSizer plot.StringSizer, axisLength vg.Length) []plot.Tick {
-	var t []plot.Tick
+func (integerTicks) Ticks(min, max float64, stringSizer nplot.StringSizer, axisLength vg.Length) []nplot.Tick {
+	var t []nplot.Tick
 	for i := math.Trunc(min); i <= max; i++ {
-		t = append(t, plot.Tick{Value: i, Label: fmt.Sprint(i)})
+		t = append(t, nplot.Tick{Value: i, Label: fmt.Sprint(i)})
 	}
 	return t
 }
@@ -78,7 +78,7 @@ func TestHeatMapDims(t *testing.T) {
 			m := offsetUnitGrid{Data: mat.NewDense(test.rows, test.cols, nil)}
 			h := plotter.NewHeatMap(m, pal)
 
-			p, err := plot.New()
+			p, err := nplot.New()
 			if err != nil {
 				t.Errorf("unexpected error: %v", err)
 			}

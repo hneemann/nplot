@@ -14,11 +14,11 @@ import (
 	"image/color"
 
 	"gonum.org/v1/gonum/mat"
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/palette"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/palette"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 type deciGrid struct{ mat.Matrix }
@@ -60,7 +60,7 @@ func main() {
 
 	h := plotter.NewHeatMap(volcano, palette.Heat(len(levels)*2, 1))
 
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		panic(err)
 	}

@@ -9,12 +9,12 @@ import (
 	"log"
 	"os"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/palette"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
-	"github.com/hneemann/plot/vg/vgimg"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/palette"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
+	"github.com/hneemann/nplot/vg/vgimg"
 	"gonum.org/v1/gonum/mat"
 )
 
@@ -30,7 +30,7 @@ func ExampleHeatMap() {
 	pal := palette.Heat(12, 1)
 	h := plotter.NewHeatMap(m, pal)
 
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}
@@ -42,7 +42,7 @@ func ExampleHeatMap() {
 	p.Add(h)
 
 	// Create a legend.
-	l, err := plot.NewLegend()
+	l, err := nplot.NewLegend()
 	if err != nil {
 		log.Panic(err)
 	}

@@ -13,11 +13,11 @@ import (
 	"os"
 	"testing"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/cmpimg"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg/draw"
-	"github.com/hneemann/plot/vg/vgpdf"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/cmpimg"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg/draw"
+	"github.com/hneemann/nplot/vg/vgpdf"
 )
 
 func TestEmbedFonts(t *testing.T) {
@@ -35,9 +35,9 @@ func TestEmbedFonts(t *testing.T) {
 		},
 	} {
 		t.Run(fmt.Sprintf("embed=%v", tc.embed), func(t *testing.T) {
-			p, err := plot.New()
+			p, err := nplot.New()
 			if err != nil {
-				t.Fatalf("could not create plot: %v", err)
+				t.Fatalf("could not create nplot: %v", err)
 			}
 
 			pts := plotter.XYs{{0, 0}, {0, 1}, {1, 0}, {1, 1}}
@@ -63,7 +63,7 @@ func TestEmbedFonts(t *testing.T) {
 
 			want, err := ioutil.ReadFile(tc.name)
 			if err != nil {
-				t.Fatalf("failed to read golden plot: %v", err)
+				t.Fatalf("failed to read golden nplot: %v", err)
 			}
 
 			ok, err := cmpimg.Equal("pdf", buf.Bytes(), want)
@@ -72,7 +72,7 @@ func TestEmbedFonts(t *testing.T) {
 			}
 
 			if !ok {
-				t.Fatalf("plot mismatch: %v", tc.name)
+				t.Fatalf("nplot mismatch: %v", tc.name)
 			}
 		})
 	}
@@ -84,7 +84,7 @@ func TestArc(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -113,12 +113,12 @@ func TestArc(t *testing.T) {
 
 	want, err := ioutil.ReadFile("testdata/arc_golden.pdf")
 	if err != nil {
-		t.Fatalf("failed to read golden plot: %v", err)
+		t.Fatalf("failed to read golden nplot: %v", err)
 	}
 
 	got, err := ioutil.ReadFile("testdata/arc.pdf")
 	if err != nil {
-		t.Fatalf("failed to read plot: %v", err)
+		t.Fatalf("failed to read nplot: %v", err)
 	}
 
 	ok, err := cmpimg.Equal("pdf", got, want)
@@ -127,7 +127,7 @@ func TestArc(t *testing.T) {
 	}
 
 	if !ok {
-		t.Fatalf("plot mismatch")
+		t.Fatalf("nplot mismatch")
 	}
 }
 
@@ -136,7 +136,7 @@ func TestMultipage(t *testing.T) {
 }
 
 func TestIssue540(t *testing.T) {
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		t.Fatal(err)
 	}

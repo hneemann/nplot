@@ -7,9 +7,9 @@ package plotter
 import (
 	"image/color"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 var (
@@ -30,15 +30,15 @@ var (
 )
 
 // QuartPlot implements the Plotter interface, drawing
-// a plot to represent the distribution of values.
+// a nplot to represent the distribution of values.
 //
-// This style of the plot appears in Tufte's "The Visual
+// This style of the nplot appears in Tufte's "The Visual
 // Display of Quantitative Information".
 type QuartPlot struct {
 	fiveStatPlot
 
-	// Offset is added to the x location of each plot.
-	// When the Offset is zero, the plot is drawn
+	// Offset is added to the x location of each nplot.
+	// When the Offset is zero, the nplot is drawn
 	// centered at its x location.
 	Offset vg.Length
 
@@ -57,7 +57,7 @@ type QuartPlot struct {
 // NewQuartPlot returns a new QuartPlot that represents
 // the distribution of the given values.
 //
-// An error is returned if the plot is created with
+// An error is returned if the nplot is created with
 // no values.
 //
 // The fence values are 1.5x the interquartile before
@@ -80,7 +80,7 @@ func NewQuartPlot(loc float64, values Valuer) (*QuartPlot, error) {
 }
 
 // Plot draws the QuartPlot on Canvas c and Plot plt.
-func (b *QuartPlot) Plot(c draw.Canvas, plt *plot.Plot) {
+func (b *QuartPlot) Plot(c draw.Canvas, plt *nplot.Plot) {
 	if b.Horizontal {
 		b := &horizQuartPlot{b}
 		b.Plot(c, plt)
@@ -117,7 +117,7 @@ func (b *QuartPlot) Plot(c draw.Canvas, plt *plot.Plot) {
 }
 
 // DataRange returns the minimum and maximum x
-// and y values, implementing the plot.DataRanger
+// and y values, implementing the nplot.DataRanger
 // interface.
 func (b *QuartPlot) DataRange() (float64, float64, float64, float64) {
 	if b.Horizontal {
@@ -127,15 +127,15 @@ func (b *QuartPlot) DataRange() (float64, float64, float64, float64) {
 	return b.Location, b.Location, b.Min, b.Max
 }
 
-// GlyphBoxes returns a slice of GlyphBoxes for the plot,
-// implementing the plot.GlyphBoxer interface.
-func (b *QuartPlot) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
+// GlyphBoxes returns a slice of GlyphBoxes for the nplot,
+// implementing the nplot.GlyphBoxer interface.
+func (b *QuartPlot) GlyphBoxes(plt *nplot.Plot) []nplot.GlyphBox {
 	if b.Horizontal {
 		b := &horizQuartPlot{b}
 		return b.GlyphBoxes(plt)
 	}
 
-	bs := make([]plot.GlyphBox, len(b.Outside)+1)
+	bs := make([]nplot.GlyphBox, len(b.Outside)+1)
 
 	ostyle := b.MedianStyle
 	ostyle.Radius = b.MedianStyle.Radius / 2
@@ -152,10 +152,10 @@ func (b *QuartPlot) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	return bs
 }
 
-// OutsideLabels returns a *Labels that will plot
+// OutsideLabels returns a *Labels that will nplot
 // a label for each of the outside points.  The
 // labels are assumed to correspond to the
-// points used to create the plot.
+// points used to create the nplot.
 func (b *QuartPlot) OutsideLabels(labels Labeller) (*Labels, error) {
 	if b.Horizontal {
 		b := &horizQuartPlot{b}
@@ -196,7 +196,7 @@ func (o quartPlotOutsideLabels) Label(i int) string {
 // it draws horizontally instead of Vertically.
 type horizQuartPlot struct{ *QuartPlot }
 
-func (b horizQuartPlot) Plot(c draw.Canvas, plt *plot.Plot) {
+func (b horizQuartPlot) Plot(c draw.Canvas, plt *nplot.Plot) {
 	trX, trY := plt.Transforms(&c)
 	y := trY(b.Location)
 	if !c.ContainsY(y) {
@@ -227,16 +227,16 @@ func (b horizQuartPlot) Plot(c draw.Canvas, plt *plot.Plot) {
 }
 
 // DataRange returns the minimum and maximum x
-// and y values, implementing the plot.DataRanger
+// and y values, implementing the nplot.DataRanger
 // interface.
 func (b horizQuartPlot) DataRange() (float64, float64, float64, float64) {
 	return b.Min, b.Max, b.Location, b.Location
 }
 
-// GlyphBoxes returns a slice of GlyphBoxes for the plot,
-// implementing the plot.GlyphBoxer interface.
-func (b horizQuartPlot) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
-	bs := make([]plot.GlyphBox, len(b.Outside)+1)
+// GlyphBoxes returns a slice of GlyphBoxes for the nplot,
+// implementing the nplot.GlyphBoxer interface.
+func (b horizQuartPlot) GlyphBoxes(plt *nplot.Plot) []nplot.GlyphBox {
+	bs := make([]nplot.GlyphBox, len(b.Outside)+1)
 
 	ostyle := b.MedianStyle
 	ostyle.Radius = b.MedianStyle.Radius / 2
@@ -253,10 +253,10 @@ func (b horizQuartPlot) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	return bs
 }
 
-// OutsideLabels returns a *Labels that will plot
+// OutsideLabels returns a *Labels that will nplot
 // a label for each of the outside points.  The
 // labels are assumed to correspond to the
-// points used to create the plot.
+// points used to create the nplot.
 func (b *horizQuartPlot) OutsideLabels(labels Labeller) (*Labels, error) {
 	strs := make([]string, len(b.Outside))
 	for i, out := range b.Outside {

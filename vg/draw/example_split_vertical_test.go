@@ -7,7 +7,7 @@ package draw_test
 import (
 	"fmt"
 
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 func ExampleCrop_splitVertical() {

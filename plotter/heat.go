@@ -8,10 +8,10 @@ import (
 	"image/color"
 	"math"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/palette"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/palette"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 // GridXYZ describes three dimensional data where the X and Y
@@ -96,8 +96,8 @@ func NewHeatMap(g GridXYZ, p palette.Palette) *HeatMap {
 	}
 }
 
-// Plot implements the Plot method of the plot.Plotter interface.
-func (h *HeatMap) Plot(c draw.Canvas, plt *plot.Plot) {
+// Plot implements the Plot method of the nplot.Plotter interface.
+func (h *HeatMap) Plot(c draw.Canvas, plt *nplot.Plot) {
 	if h.Min > h.Max {
 		panic("contour: invalid Z range: min greater than max")
 	}
@@ -182,7 +182,7 @@ func (h *HeatMap) Plot(c draw.Canvas, plt *plot.Plot) {
 }
 
 // DataRange implements the DataRange method
-// of the plot.DataRanger interface.
+// of the nplot.DataRanger interface.
 func (h *HeatMap) DataRange() (xmin, xmax, ymin, ymax float64) {
 	c, r := h.GridXYZ.Dims()
 	switch c {
@@ -205,13 +205,13 @@ func (h *HeatMap) DataRange() (xmin, xmax, ymin, ymax float64) {
 }
 
 // GlyphBoxes implements the GlyphBoxes method
-// of the plot.GlyphBoxer interface.
-func (h *HeatMap) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
+// of the nplot.GlyphBoxer interface.
+func (h *HeatMap) GlyphBoxes(plt *nplot.Plot) []nplot.GlyphBox {
 	c, r := h.GridXYZ.Dims()
-	b := make([]plot.GlyphBox, 0, r*c)
+	b := make([]nplot.GlyphBox, 0, r*c)
 	for i := 0; i < c; i++ {
 		for j := 0; j < r; j++ {
-			b = append(b, plot.GlyphBox{
+			b = append(b, nplot.GlyphBox{
 				X: plt.X.Norm(h.GridXYZ.X(i)),
 				Y: plt.Y.Norm(h.GridXYZ.Y(j)),
 				Rectangle: vg.Rectangle{

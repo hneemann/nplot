@@ -11,12 +11,12 @@ import (
 	"math"
 	"os"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/palette/moreland"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
-	"github.com/hneemann/plot/vg/vgimg"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/palette/moreland"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
+	"github.com/hneemann/nplot/vg/vgimg"
 )
 
 func ExampleField() {
@@ -31,7 +31,7 @@ func ExampleField() {
 	})
 	f.LineStyle.Width = 0.2
 
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}
@@ -99,7 +99,7 @@ func ExampleField_colors() {
 		c.Stroke(pa)
 	}
 
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}
@@ -161,7 +161,7 @@ func ExampleField_gophers() {
 		c.DrawImage(vg.Rectangle{Max: vg.Point{X: 2, Y: 2}}, gopher)
 	}
 
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}

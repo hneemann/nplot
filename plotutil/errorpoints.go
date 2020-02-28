@@ -8,7 +8,7 @@ import (
 	"math"
 	"sort"
 
-	"github.com/hneemann/plot/plotter"
+	"github.com/hneemann/nplot/plotter"
 )
 
 // ErrorPoints holds a set of x, y pairs along

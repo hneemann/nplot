@@ -9,9 +9,9 @@ import (
 	"image/color"
 	"math"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 // A BarChart presents grouped data with rectangular bars
@@ -95,8 +95,8 @@ func (b *BarChart) StackOn(on *BarChart) {
 	b.stackedOn = on
 }
 
-// Plot implements the plot.Plotter interface.
-func (b *BarChart) Plot(c draw.Canvas, plt *plot.Plot) {
+// Plot implements the nplot.Plotter interface.
+func (b *BarChart) Plot(c draw.Canvas, plt *nplot.Plot) {
 	trCat, trVal := plt.Transforms(&c)
 	if b.Horizontal {
 		trCat, trVal = trVal, trCat
@@ -153,7 +153,7 @@ func (b *BarChart) Plot(c draw.Canvas, plt *plot.Plot) {
 	}
 }
 
-// DataRange implements the plot.DataRanger interface.
+// DataRange implements the nplot.DataRanger interface.
 func (b *BarChart) DataRange() (xmin, xmax, ymin, ymax float64) {
 	catMin := b.XMin
 	catMax := catMin + float64(len(b.Values)-1)
@@ -173,8 +173,8 @@ func (b *BarChart) DataRange() (xmin, xmax, ymin, ymax float64) {
 }
 
 // GlyphBoxes implements the GlyphBoxer interface.
-func (b *BarChart) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
-	boxes := make([]plot.GlyphBox, len(b.Values))
+func (b *BarChart) GlyphBoxes(plt *nplot.Plot) []nplot.GlyphBox {
+	boxes := make([]nplot.GlyphBox, len(b.Values))
 	for i := range b.Values {
 		cat := b.XMin + float64(i)
 		if !b.Horizontal {
@@ -194,7 +194,7 @@ func (b *BarChart) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	return boxes
 }
 
-// Thumbnail fulfills the plot.Thumbnailer interface.
+// Thumbnail fulfills the nplot.Thumbnailer interface.
 func (b *BarChart) Thumbnail(c *draw.Canvas) {
 	pts := []vg.Point{
 		{c.Min.X, c.Min.Y},

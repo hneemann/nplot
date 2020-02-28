@@ -9,9 +9,9 @@ import (
 
 	"golang.org/x/exp/rand"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
 )
 
 func ExampleQuartPlot() {
@@ -42,8 +42,8 @@ func ExampleQuartPlot() {
 		log.Panic(err)
 	}
 
-	// Create a vertical plot
-	p1, err := plot.New()
+	// Create a vertical nplot
+	p1, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}
@@ -51,7 +51,7 @@ func ExampleQuartPlot() {
 	p1.Y.Label.Text = "plotter.Values"
 	p1.Add(qp1, qp2, qp3)
 
-	// Set the X axis of the plot to nominal with
+	// Set the X axis of the nplot to nominal with
 	// the given names for x=0, x=1 and x=2.
 	p1.NominalX("Uniform\nDistribution", "Normal\nDistribution",
 		"Exponential\nDistribution")
@@ -61,12 +61,12 @@ func ExampleQuartPlot() {
 		log.Panic(err)
 	}
 
-	// Create a horizontal plot
+	// Create a horizontal nplot
 	qp1.Horizontal = true
 	qp2.Horizontal = true
 	qp3.Horizontal = true
 
-	p2, err := plot.New()
+	p2, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}
@@ -74,7 +74,7 @@ func ExampleQuartPlot() {
 	p2.X.Label.Text = "plotter.Values"
 	p2.Add(qp1, qp2, qp3)
 
-	// Set the Y axis of the plot to nominal with
+	// Set the Y axis of the nplot to nominal with
 	// the given names for y=0, y=1 and y=2.
 	p2.NominalY("Uniform\nDistribution", "Normal\nDistribution",
 		"Exponential\nDistribution")
@@ -84,9 +84,9 @@ func ExampleQuartPlot() {
 		log.Panic(err)
 	}
 
-	// Now, create a grouped quartile plot.
+	// Now, create a grouped quartile nplot.
 
-	p3, err := plot.New()
+	p3, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}

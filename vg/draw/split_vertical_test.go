@@ -5,8 +5,8 @@
 package draw_test
 
 import (
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 // SplitVertical returns the lower and upper portions of c after

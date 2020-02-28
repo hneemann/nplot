@@ -4,7 +4,7 @@
 
 // Package vgpdf implements the vg.Canvas interface
 // using gofpdf (github.com/jung-kurt/gofpdf).
-package vgpdf // import "github.com/hneemann/plot/vg/vgpdf"
+package vgpdf // import "github.com/hneemann/nplot/vg/vgpdf"
 
 import (
 	"bufio"
@@ -22,8 +22,8 @@ import (
 
 	pdf "github.com/jung-kurt/gofpdf"
 
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/fonts"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/fonts"
 )
 
 // DPI is the nominal resolution of drawing in PDF.

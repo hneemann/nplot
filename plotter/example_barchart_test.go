@@ -10,19 +10,19 @@ import (
 
 	"golang.org/x/exp/rand"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
 )
 
 func ExampleBarChart() {
-	// Create the plot values and labels.
+	// Create the nplot values and labels.
 	values := plotter.Values{0.5, 10, 20, 30}
 	verticalLabels := []string{"A", "B", "C", "D"}
 	horizontalLabels := []string{"Label A", "Label B", "Label C", "Label D"}
 
 	// Create a vertical BarChart
-	p1, err := plot.New()
+	p1, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}
@@ -38,7 +38,7 @@ func ExampleBarChart() {
 	}
 
 	// Create a horizontal BarChart
-	p2, err := plot.New()
+	p2, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}
@@ -60,7 +60,7 @@ func ExampleBarChart() {
 	groupC := plotter.Values{12, 28, 15, 21, 8}
 	groupD := plotter.Values{30, 42, 6, 9, 12}
 
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}
@@ -115,7 +115,7 @@ func ExampleBarChart() {
 	}
 
 	// Now, make a stacked BarChart.
-	p, err = plot.New()
+	p, err = nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}
@@ -243,7 +243,7 @@ func ExampleBarChart_positiveNegative() {
 		log.Panic(err)
 	}
 
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}

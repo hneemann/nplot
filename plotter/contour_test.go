@@ -14,9 +14,9 @@ import (
 
 	"golang.org/x/exp/rand"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/palette"
-	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/palette"
+	"github.com/hneemann/nplot/vg"
 	"gonum.org/v1/gonum/mat"
 )
 
@@ -56,7 +56,7 @@ func TestHeatMapWithContour(t *testing.T) {
 	c := NewContour(m, levels, palette.Rainbow(10, palette.Blue, palette.Red, 1, 1, 1))
 	c.LineStyles[0].Width *= 5
 
-	plt, _ := plot.New()
+	plt, _ := nplot.New()
 
 	plt.Add(h)
 	plt.Add(c)
@@ -89,7 +89,7 @@ func TestComplexContours(t *testing.T) {
 		levels := []float64{-1, 3, 7, 9, 13, 15, 19, 23, 27, 31}
 		c := NewContour(m, levels, palette.Rainbow(10, palette.Blue, palette.Red, 1, 1, 1))
 
-		plt, _ := plot.New()
+		plt, _ := nplot.New()
 		plt.Add(c)
 
 		plt.X.Padding = 0

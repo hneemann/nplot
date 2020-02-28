@@ -9,14 +9,14 @@ import (
 	"log"
 	"os"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
 )
 
-// An example of embedding an image in a plot.
+// An example of embedding an image in a nplot.
 func ExampleImage() {
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		log.Fatalf("error: %v\n", err)
 	}
@@ -43,13 +43,13 @@ func ExampleImage() {
 
 	err = p.Save(w, h, "testdata/image_plot.png")
 	if err != nil {
-		log.Fatalf("error saving image plot: %v\n", err)
+		log.Fatalf("error saving image nplot: %v\n", err)
 	}
 }
 
-// An example of embedding an image in a plot with non-linear axes.
+// An example of embedding an image in a nplot with non-linear axes.
 func ExampleImage_log() {
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		log.Fatalf("error: %v\n", err)
 	}
@@ -70,10 +70,10 @@ func ExampleImage_log() {
 	p.Add(plotter.NewImage(img, 100, 100, 10000, 10000))
 
 	// Transform axes.
-	p.X.Scale = plot.LogScale{}
-	p.Y.Scale = plot.LogScale{}
-	p.X.Tick.Marker = plot.LogTicks{}
-	p.Y.Tick.Marker = plot.LogTicks{}
+	p.X.Scale = nplot.LogScale{}
+	p.Y.Scale = nplot.LogScale{}
+	p.X.Tick.Marker = nplot.LogTicks{}
+	p.Y.Tick.Marker = nplot.LogTicks{}
 
 	const (
 		w = 5 * vg.Centimeter
@@ -82,6 +82,6 @@ func ExampleImage_log() {
 
 	err = p.Save(w, h, "testdata/image_plot_log.png")
 	if err != nil {
-		log.Fatalf("error saving image plot: %v\n", err)
+		log.Fatalf("error saving image nplot: %v\n", err)
 	}
 }

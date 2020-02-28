@@ -16,7 +16,7 @@ const (
 	// importString is the import string expected for
 	// this package.  It is used to find the font
 	// directory included with the package source.
-	importString = "github.com/hneemann/plot/vg"
+	importString = "github.com/hneemann/nplot/vg"
 )
 
 func init() {

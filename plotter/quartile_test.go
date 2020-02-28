@@ -7,7 +7,7 @@ package plotter_test
 import (
 	"testing"
 
-	"github.com/hneemann/plot/cmpimg"
+	"github.com/hneemann/nplot/cmpimg"
 )
 
 func TestQuartPlot(t *testing.T) {

@@ -2,12 +2,12 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package plot_test
+package nplot_test
 
 import (
 	"testing"
 
-	"github.com/hneemann/plot/cmpimg"
+	"github.com/hneemann/nplot/cmpimg"
 )
 
 func TestLegend_standalone(t *testing.T) {

@@ -4,19 +4,19 @@
 
 // +build go1.12
 
-package plot
+package nplot
 
 import (
 	"fmt"
 	"runtime/debug"
 )
 
-const root = "github.com/hneemann/plot"
+const root = "github.com/hneemann/nplot"
 
-// Version returns the version of Gonum/plot and its checksum. The returned
+// Version returns the version of Gonum/nplot and its checksum. The returned
 // values are only valid in binaries built with module support.
 //
-// If a replace directive exists in the Gonum/plot go.mod, the replace will
+// If a replace directive exists in the Gonum/nplot go.mod, the replace will
 // be reported in the version in the following format:
 //  "version=>[replace-path] [replace-version]"
 // and the replace sum will be returned in place of the original sum.

@@ -7,17 +7,17 @@ package plotter
 import (
 	"image/color"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/palette"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/palette"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
-// PaletteThumbnailers creates a slice of plot.Thumbnailers that can be used to
+// PaletteThumbnailers creates a slice of nplot.Thumbnailers that can be used to
 // add legend entries for the colors in a color palette.
-func PaletteThumbnailers(p palette.Palette) []plot.Thumbnailer {
+func PaletteThumbnailers(p palette.Palette) []nplot.Thumbnailer {
 	colors := p.Colors()
-	thumbnailers := make([]plot.Thumbnailer, len(colors))
+	thumbnailers := make([]nplot.Thumbnailer, len(colors))
 	for i, c := range colors {
 		thumbnailers[i] = paletteThumbnailer{color: c}
 	}
@@ -30,7 +30,7 @@ type paletteThumbnailer struct {
 	color color.Color
 }
 
-// Thumbnail satisfies the plot.Thumbnailer interface.
+// Thumbnail satisfies the nplot.Thumbnailer interface.
 func (t paletteThumbnailer) Thumbnail(c *draw.Canvas) {
 	pts := []vg.Point{
 		{X: c.Min.X, Y: c.Min.Y},

@@ -8,9 +8,9 @@ import (
 	"image/color"
 	"math"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 // Polygon implements the Plotter interface, drawing a polygon.
@@ -49,9 +49,9 @@ func NewPolygon(xys ...XYer) (*Polygon, error) {
 	}, nil
 }
 
-// Plot draws the polygon, implementing the plot.Plotter
+// Plot draws the polygon, implementing the nplot.Plotter
 // interface.
-func (pts *Polygon) Plot(c draw.Canvas, plt *plot.Plot) {
+func (pts *Polygon) Plot(c draw.Canvas, plt *nplot.Plot) {
 	trX, trY := plt.Transforms(&c)
 	ps := make([][]vg.Point, len(pts.XYs))
 
@@ -88,7 +88,7 @@ func (pts *Polygon) Plot(c draw.Canvas, plt *plot.Plot) {
 }
 
 // DataRange returns the minimum and maximum
-// x and y values, implementing the plot.DataRanger
+// x and y values, implementing the nplot.DataRanger
 // interface.
 func (pts *Polygon) DataRange() (xmin, xmax, ymin, ymax float64) {
 	xmin = math.Inf(1)
@@ -107,7 +107,7 @@ func (pts *Polygon) DataRange() (xmin, xmax, ymin, ymax float64) {
 }
 
 // Thumbnail creates the thumbnail for the Polygon,
-// implementing the plot.Thumbnailer interface.
+// implementing the nplot.Thumbnailer interface.
 func (pts *Polygon) Thumbnail(c *draw.Canvas) {
 	if pts.Color != nil {
 		points := []vg.Point{

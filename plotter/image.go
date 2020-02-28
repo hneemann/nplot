@@ -8,9 +8,9 @@ import (
 	"image"
 	"math"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 // Image is a plotter that draws a scaled, raster image.
@@ -23,7 +23,7 @@ type Image struct {
 }
 
 // NewImage creates a new image plotter.
-// Image will plot img inside the rectangle defined by the
+// Image will nplot img inside the rectangle defined by the
 // (xmin, ymin) and (xmax, ymax) points given in the data space.
 // The img will be scaled to fit inside the rectangle.
 func NewImage(img image.Image, xmin, ymin, xmax, ymax float64) *Image {
@@ -45,8 +45,8 @@ func NewImage(img image.Image, xmin, ymin, xmax, ymax float64) *Image {
 	}
 }
 
-// Plot implements the Plot method of the plot.Plotter interface.
-func (img *Image) Plot(c draw.Canvas, p *plot.Plot) {
+// Plot implements the Plot method of the nplot.Plotter interface.
+func (img *Image) Plot(c draw.Canvas, p *nplot.Plot) {
 	trX, trY := p.Transforms(&c)
 	xmin := trX(img.xmin)
 	ymin := trY(img.ymin)
@@ -60,21 +60,21 @@ func (img *Image) Plot(c draw.Canvas, p *plot.Plot) {
 }
 
 // DataRange implements the DataRange method
-// of the plot.DataRanger interface.
+// of the nplot.DataRanger interface.
 func (img *Image) DataRange() (xmin, xmax, ymin, ymax float64) {
 	return img.xmin, img.xmax, img.ymin, img.ymax
 }
 
 // GlyphBoxes implements the GlyphBoxes method
-// of the plot.GlyphBoxer interface.
-func (img *Image) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
+// of the nplot.GlyphBoxer interface.
+func (img *Image) GlyphBoxes(plt *nplot.Plot) []nplot.GlyphBox {
 	return nil
 }
 
 // transform warps the image to align with non-linear axes.
-func (img *Image) transformFor(p *plot.Plot) image.Image {
-	_, xLinear := p.X.Scale.(plot.LinearScale)
-	_, yLinear := p.Y.Scale.(plot.LinearScale)
+func (img *Image) transformFor(p *nplot.Plot) image.Image {
+	_, xLinear := p.X.Scale.(nplot.LinearScale)
+	_, yLinear := p.Y.Scale.(nplot.LinearScale)
 	if xLinear && yLinear {
 		return img.img
 	}

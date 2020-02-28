@@ -10,9 +10,9 @@ import (
 
 	"golang.org/x/exp/rand"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
 )
 
 func ExampleBoxPlot() {
@@ -32,7 +32,7 @@ func ExampleBoxPlot() {
 		expon[i].Label = fmt.Sprintf("%4.4f", expon[i].Value)
 	}
 
-	// Make boxes for our data and add them to the plot.
+	// Make boxes for our data and add them to the nplot.
 	uniBox, err := plotter.NewBoxPlot(vg.Points(20), 0, uniform)
 	if err != nil {
 		log.Panic(err)
@@ -46,7 +46,7 @@ func ExampleBoxPlot() {
 		log.Panic(err)
 	}
 
-	// Make a vertical box plot.
+	// Make a vertical box nplot.
 	uniLabels, err := uniBox.OutsideLabels(uniform)
 	if err != nil {
 		log.Panic(err)
@@ -60,7 +60,7 @@ func ExampleBoxPlot() {
 		log.Panic(err)
 	}
 
-	p1, err := plot.New()
+	p1, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}
@@ -69,7 +69,7 @@ func ExampleBoxPlot() {
 	p1.Y.Max = 6
 	p1.Add(uniBox, uniLabels, normBox, normLabels, expBox, expLabels)
 
-	// Set the X axis of the plot to nominal with
+	// Set the X axis of the nplot to nominal with
 	// the given names for x=0, x=1 and x=2.
 	p1.NominalX("Uniform\nDistribution", "Normal\nDistribution",
 		"Exponential\nDistribution")
@@ -79,7 +79,7 @@ func ExampleBoxPlot() {
 		log.Panic(err)
 	}
 
-	// Now, make the same plot but horizontal.
+	// Now, make the same nplot but horizontal.
 	normBox.Horizontal = true
 	expBox.Horizontal = true
 	uniBox.Horizontal = true
@@ -97,7 +97,7 @@ func ExampleBoxPlot() {
 		log.Panic(err)
 	}
 
-	p2, err := plot.New()
+	p2, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}
@@ -106,7 +106,7 @@ func ExampleBoxPlot() {
 
 	p2.Add(uniBox, uniLabels, normBox, normLabels, expBox, expLabels)
 
-	// Set the Y axis of the plot to nominal with
+	// Set the Y axis of the nplot to nominal with
 	// the given names for y=0, y=1 and y=2.
 	p2.NominalY("Uniform\nDistribution", "Normal\nDistribution",
 		"Exponential\nDistribution")
@@ -116,8 +116,8 @@ func ExampleBoxPlot() {
 		log.Panic(err)
 	}
 
-	// Now, make a grouped box plot.
-	p3, err := plot.New()
+	// Now, make a grouped box nplot.
+	p3, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}
@@ -145,7 +145,7 @@ func ExampleBoxPlot() {
 	// Add a GlyphBox plotter for debugging.
 	p3.Add(plotter.NewGlyphBoxes())
 
-	// Set the X axis of the plot to nominal with
+	// Set the X axis of the nplot to nominal with
 	// the given names for x=0, x=1 and x=2.
 	p3.NominalX("Group 0", "Group 1", "Group 2")
 	err = p3.Save(300, 300, "testdata/groupedBoxPlot.png")

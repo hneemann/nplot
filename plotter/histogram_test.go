@@ -8,10 +8,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/cmpimg"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/cmpimg"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
 )
 
 func TestHistogram(t *testing.T) {
@@ -22,9 +22,9 @@ func TestSingletonHistogram(t *testing.T) {
 	done := make(chan struct{}, 1)
 	go func() {
 		defer close(done)
-		p, err := plot.New()
+		p, err := nplot.New()
 		if err != nil {
-			t.Fatalf("unexpected error from plot.New: %v", err)
+			t.Fatalf("unexpected error from nplot.New: %v", err)
 		}
 
 		hist, err := plotter.NewHist(plotter.Values([]float64{1.0}), 60)

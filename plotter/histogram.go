@@ -10,9 +10,9 @@ import (
 	"image/color"
 	"math"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 // Histogram implements the Plotter interface,
@@ -38,7 +38,7 @@ type Histogram struct {
 	// the histogram's DataRange.
 	// The lowest Y value for the DataRange will be corrected to leave an
 	// arbitrary amount of height for the smallest bin entry so it is visible
-	// on the final plot.
+	// on the final nplot.
 	LogY bool
 }
 
@@ -81,7 +81,7 @@ func (u unitYs) XY(i int) (float64, float64) {
 
 // Plot implements the Plotter interface, drawing a line
 // that connects each point in the Line.
-func (h *Histogram) Plot(c draw.Canvas, p *plot.Plot) {
+func (h *Histogram) Plot(c draw.Canvas, p *nplot.Plot) {
 	trX, trY := p.Transforms(&c)
 
 	for _, bin := range h.Bins {

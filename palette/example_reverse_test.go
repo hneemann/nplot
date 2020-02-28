@@ -8,16 +8,16 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/palette"
-	"github.com/hneemann/plot/palette/moreland"
-	"github.com/hneemann/plot/plotter"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/palette"
+	"github.com/hneemann/nplot/palette/moreland"
+	"github.com/hneemann/nplot/plotter"
 )
 
 // This example creates a color bar and a second color bar where the
 // direction of the colors are reversed.
 func ExampleReverse() {
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}
@@ -40,7 +40,7 @@ func ExampleReverse() {
 
 // This example creates a color palette from a reversed ColorMap.
 func ExampleReverse_palette() {
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}

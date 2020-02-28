@@ -10,19 +10,19 @@ import (
 	"log"
 	"os"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
-	"github.com/hneemann/plot/vg/vgpdf"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
+	"github.com/hneemann/nplot/vg/vgpdf"
 )
 
 // Example_embedFonts shows how one can embed (or not) fonts inside
-// a PDF plot.
+// a PDF nplot.
 func Example_embedFonts() {
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
-		log.Fatalf("could not create plot: %v", err)
+		log.Fatalf("could not create nplot: %v", err)
 	}
 
 	pts := plotter.XYs{{X: 0, Y: 0}, {X: 0, Y: 1}, {X: 1, Y: 0}, {X: 1, Y: 1}}
@@ -67,9 +67,9 @@ func Example_multipage() {
 			c.NextPage()
 		}
 
-		p, err := plot.New()
+		p, err := nplot.New()
 		if err != nil {
-			log.Fatalf("could not create plot: %v", err)
+			log.Fatalf("could not create nplot: %v", err)
 		}
 
 		pts := plotter.XYs{{X: 0, Y: 0}, {X: 0, Y: 1}, {X: 1, Y: 0}, {X: 1, Y: 1}}
@@ -83,7 +83,7 @@ func Example_multipage() {
 		p.X.Label.Text = "X axis"
 		p.Y.Label.Text = "Y axis"
 
-		// Write plot to page.
+		// Write nplot to page.
 		p.Draw(draw.New(c))
 	}
 

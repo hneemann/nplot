@@ -9,12 +9,12 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/cmpimg"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
-	"github.com/hneemann/plot/vg/vgsvg"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/cmpimg"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
+	"github.com/hneemann/nplot/vg/vgsvg"
 )
 
 func TestSVG(t *testing.T) {
@@ -22,11 +22,11 @@ func TestSVG(t *testing.T) {
 }
 
 func TestNewWith(t *testing.T) {
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
-		t.Fatalf("could not create plot: %v", err)
+		t.Fatalf("could not create nplot: %v", err)
 	}
-	p.Title.Text = "Scatter plot"
+	p.Title.Text = "Scatter nplot"
 	p.X.Label.Text = "X"
 	p.Y.Label.Text = "Y"
 
@@ -59,11 +59,11 @@ func TestNewWith(t *testing.T) {
 }
 
 func TestHtmlEscape(t *testing.T) {
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
-		t.Fatalf("could not create plot: %v", err)
+		t.Fatalf("could not create nplot: %v", err)
 	}
-	p.Title.Text = "Scatter & line plot"
+	p.Title.Text = "Scatter & line nplot"
 	p.X.Label.Text = "X"
 	p.Y.Label.Text = "Y"
 

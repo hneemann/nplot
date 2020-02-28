@@ -2,30 +2,30 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package gob // import "github.com/hneemann/plot/gob"
+package gob // import "github.com/hneemann/nplot/gob"
 
 import (
 	"encoding/gob"
 	"image/color"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/plotter"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/plotter"
 )
 
 func init() {
 	// register types for proper gob-encoding/decoding
 	gob.Register(color.Gray16{})
 
-	// plot.Ticker
-	gob.Register(plot.ConstantTicks{})
-	gob.Register(plot.DefaultTicks{})
-	gob.Register(plot.LogTicks{})
+	// nplot.Ticker
+	gob.Register(nplot.ConstantTicks{})
+	gob.Register(nplot.DefaultTicks{})
+	gob.Register(nplot.LogTicks{})
 
-	// plot.Normalizer
-	gob.Register(plot.LinearScale{})
-	gob.Register(plot.LogScale{})
+	// nplot.Normalizer
+	gob.Register(nplot.LinearScale{})
+	gob.Register(nplot.LogScale{})
 
-	// plot.Plotter
+	// nplot.Plotter
 	gob.Register(plotter.BarChart{})
 	gob.Register(plotter.Histogram{})
 	gob.Register(plotter.BoxPlot{})

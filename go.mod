@@ -1,4 +1,4 @@
-module github.com/hneemann/plot
+module github.com/hneemann/nplot
 
 go 1.12
 

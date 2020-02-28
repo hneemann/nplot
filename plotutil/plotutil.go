@@ -5,13 +5,13 @@
 // Package plotutil contains a small number of utilites for creating plots.
 //
 // This package is under active development so portions of it may change.
-package plotutil // import "github.com/hneemann/plot/plotutil"
+package plotutil // import "github.com/hneemann/nplot/plotutil"
 
 import (
 	"image/color"
 
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 // DefaultColors is a set of colors used by the Color function.

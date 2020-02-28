@@ -5,9 +5,9 @@
 package plotter
 
 import (
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 // Scatter implements the Plotter interface, drawing
@@ -38,9 +38,9 @@ func NewScatter(xys XYer) (*Scatter, error) {
 	}, err
 }
 
-// Plot draws the Scatter, implementing the plot.Plotter
+// Plot draws the Scatter, implementing the nplot.Plotter
 // interface.
-func (pts *Scatter) Plot(c draw.Canvas, plt *plot.Plot) {
+func (pts *Scatter) Plot(c draw.Canvas, plt *nplot.Plot) {
 	trX, trY := plt.Transforms(&c)
 	glyph := func(i int) draw.GlyphStyle { return pts.GlyphStyle }
 	if pts.GlyphStyleFunc != nil {
@@ -52,20 +52,20 @@ func (pts *Scatter) Plot(c draw.Canvas, plt *plot.Plot) {
 }
 
 // DataRange returns the minimum and maximum
-// x and y values, implementing the plot.DataRanger
+// x and y values, implementing the nplot.DataRanger
 // interface.
 func (pts *Scatter) DataRange() (xmin, xmax, ymin, ymax float64) {
 	return XYRange(pts)
 }
 
-// GlyphBoxes returns a slice of plot.GlyphBoxes,
-// implementing the plot.GlyphBoxer interface.
-func (pts *Scatter) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
+// GlyphBoxes returns a slice of nplot.GlyphBoxes,
+// implementing the nplot.GlyphBoxer interface.
+func (pts *Scatter) GlyphBoxes(plt *nplot.Plot) []nplot.GlyphBox {
 	glyph := func(i int) draw.GlyphStyle { return pts.GlyphStyle }
 	if pts.GlyphStyleFunc != nil {
 		glyph = pts.GlyphStyleFunc
 	}
-	bs := make([]plot.GlyphBox, len(pts.XYs))
+	bs := make([]nplot.GlyphBox, len(pts.XYs))
 	for i, p := range pts.XYs {
 		bs[i].X = plt.X.Norm(p.X)
 		bs[i].Y = plt.Y.Norm(p.Y)
@@ -79,7 +79,7 @@ func (pts *Scatter) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 }
 
 // Thumbnail the thumbnail for the Scatter,
-// implementing the plot.Thumbnailer interface.
+// implementing the nplot.Thumbnailer interface.
 func (pts *Scatter) Thumbnail(c *draw.Canvas) {
 	c.DrawGlyph(pts.GlyphStyle, c.Center())
 }

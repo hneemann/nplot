@@ -8,9 +8,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
 )
 
 type combineXYs struct{ xs, ys plotter.Valuer }
@@ -20,13 +20,13 @@ func (c combineXYs) XY(i int) (float64, float64) { return c.xs.Value(i), c.ys.Va
 
 type item struct {
 	name  string
-	value plot.Thumbnailer
+	value nplot.Thumbnailer
 }
 
-// AddStackedAreaPlots adds stacked area plot plotters to a plot.
+// AddStackedAreaPlots adds stacked area nplot plotters to a nplot.
 // The variadic arguments must be either strings
 // or plotter.Valuers.  Each valuer adds a stacked area
-// plot to the plot below the stacked area plots added
+// nplot to the nplot below the stacked area plots added
 // before it.  If a plotter.Valuer is immediately
 // preceeded by a string then the string value is used to
 // label the legend.
@@ -35,9 +35,9 @@ type item struct {
 // (i.e. later plots will be painted over earlier plots).
 //
 // If an error occurs then none of the plotters are added
-// to the plot, and the error is returned.
-func AddStackedAreaPlots(plt *plot.Plot, xs plotter.Valuer, vs ...interface{}) error {
-	var ps []plot.Plotter
+// to the nplot, and the error is returned.
+func AddStackedAreaPlots(plt *nplot.Plot, xs plotter.Valuer, vs ...interface{}) error {
+	var ps []nplot.Plotter
 	var names []item
 	name := ""
 	var i int
@@ -83,20 +83,20 @@ func AddStackedAreaPlots(plt *plot.Plot, xs plotter.Valuer, vs ...interface{}) e
 	return nil
 }
 
-// AddBoxPlots adds box plot plotters to a plot and
-// sets the X axis of the plot to be nominal.
+// AddBoxPlots adds box nplot plotters to a nplot and
+// sets the X axis of the nplot to be nominal.
 // The variadic arguments must be either strings
-// or plotter.Valuers.  Each valuer adds a box plot
-// to the plot at the X location corresponding to
+// or plotter.Valuers.  Each valuer adds a box nplot
+// to the nplot at the X location corresponding to
 // the number of box plots added before it.  If a
 // plotter.Valuer is immediately preceeded by a
 // string then the string value is used to label the
-// tick mark for the box plot's X location.
+// tick mark for the box nplot's X location.
 //
 // If an error occurs then none of the plotters are added
-// to the plot, and the error is returned.
-func AddBoxPlots(plt *plot.Plot, width vg.Length, vs ...interface{}) error {
-	var ps []plot.Plotter
+// to the nplot, and the error is returned.
+func AddBoxPlots(plt *nplot.Plot, width vg.Length, vs ...interface{}) error {
+	var ps []nplot.Plotter
 	var names []string
 	name := ""
 	for _, v := range vs {
@@ -122,19 +122,19 @@ func AddBoxPlots(plt *plot.Plot, width vg.Length, vs ...interface{}) error {
 	return nil
 }
 
-// AddScatters adds Scatter plotters to a plot.
+// AddScatters adds Scatter plotters to a nplot.
 // The variadic arguments must be either strings
 // or plotter.XYers.  Each plotter.XYer is added to
-// the plot using the next color, and glyph shape
+// the nplot using the next color, and glyph shape
 // via the Color and Shape functions. If a
 // plotter.XYer is immediately preceeded by
-// a string then a legend entry is added to the plot
+// a string then a legend entry is added to the nplot
 // using the string as the name.
 //
 // If an error occurs then none of the plotters are added
-// to the plot, and the error is returned.
-func AddScatters(plt *plot.Plot, vs ...interface{}) error {
-	var ps []plot.Plotter
+// to the nplot, and the error is returned.
+func AddScatters(plt *nplot.Plot, vs ...interface{}) error {
+	var ps []nplot.Plotter
 	var items []item
 	name := ""
 	var i int
@@ -168,20 +168,20 @@ func AddScatters(plt *plot.Plot, vs ...interface{}) error {
 	return nil
 }
 
-// AddLines adds Line plotters to a plot.
+// AddLines adds Line plotters to a nplot.
 // The variadic arguments must be a string
 // or one of a plotting type, plotter.XYers or *plotter.Function.
 // Each plotting type is added to
-// the plot using the next color and dashes
+// the nplot using the next color and dashes
 // shape via the Color and Dashes functions.
 // If a plotting type is immediately preceeded by
-// a string then a legend entry is added to the plot
+// a string then a legend entry is added to the nplot
 // using the string as the name.
 //
 // If an error occurs then none of the plotters are added
-// to the plot, and the error is returned.
-func AddLines(plt *plot.Plot, vs ...interface{}) error {
-	var ps []plot.Plotter
+// to the nplot, and the error is returned.
+func AddLines(plt *nplot.Plot, vs ...interface{}) error {
+	var ps []nplot.Plotter
 	var items []item
 	name := ""
 	var i int
@@ -226,21 +226,21 @@ func AddLines(plt *plot.Plot, vs ...interface{}) error {
 }
 
 // AddLinePoints adds Line and Scatter plotters to a
-// plot.  The variadic arguments must be either strings
+// nplot.  The variadic arguments must be either strings
 // or plotter.XYers.  Each plotter.XYer is added to
-// the plot using the next color, dashes, and glyph
+// the nplot using the next color, dashes, and glyph
 // shape via the Color, Dashes, and Shape functions.
 // If a plotter.XYer is immediately preceeded by
-// a string then a legend entry is added to the plot
+// a string then a legend entry is added to the nplot
 // using the string as the name.
 //
 // If an error occurs then none of the plotters are added
-// to the plot, and the error is returned.
-func AddLinePoints(plt *plot.Plot, vs ...interface{}) error {
-	var ps []plot.Plotter
+// to the nplot, and the error is returned.
+func AddLinePoints(plt *nplot.Plot, vs ...interface{}) error {
+	var ps []nplot.Plotter
 	type item struct {
 		name  string
-		value [2]plot.Thumbnailer
+		value [2]nplot.Thumbnailer
 	}
 	var items []item
 	name := ""
@@ -262,7 +262,7 @@ func AddLinePoints(plt *plot.Plot, vs ...interface{}) error {
 			i++
 			ps = append(ps, l, s)
 			if name != "" {
-				items = append(items, item{name: name, value: [2]plot.Thumbnailer{l, s}})
+				items = append(items, item{name: name, value: [2]nplot.Thumbnailer{l, s}})
 				name = ""
 			}
 
@@ -279,17 +279,17 @@ func AddLinePoints(plt *plot.Plot, vs ...interface{}) error {
 }
 
 // AddErrorBars adds XErrorBars and YErrorBars
-// to a plot.  The variadic arguments must be
+// to a nplot.  The variadic arguments must be
 // of type plotter.XYer, and must be either a
 // plotter.XErrorer, plotter.YErrorer, or both.
-// Each errorer is added to the plot the color from
+// Each errorer is added to the nplot the color from
 // the Colors function corresponding to its position
 // in the argument list.
 //
 // If an error occurs then none of the plotters are added
-// to the plot, and the error is returned.
-func AddErrorBars(plt *plot.Plot, vs ...interface{}) error {
-	var ps []plot.Plotter
+// to the nplot, and the error is returned.
+func AddErrorBars(plt *nplot.Plot, vs ...interface{}) error {
+	var ps []nplot.Plotter
 	for i, v := range vs {
 		added := false
 
@@ -328,20 +328,20 @@ func AddErrorBars(plt *plot.Plot, vs ...interface{}) error {
 	return nil
 }
 
-// AddXErrorBars adds XErrorBars to a plot.
+// AddXErrorBars adds XErrorBars to a nplot.
 // The variadic arguments must be
 // of type plotter.XYer, and plotter.XErrorer.
-// Each errorer is added to the plot the color from
+// Each errorer is added to the nplot the color from
 // the Colors function corresponding to its position
 // in the argument list.
 //
 // If an error occurs then none of the plotters are added
-// to the plot, and the error is returned.
-func AddXErrorBars(plt *plot.Plot, es ...interface {
+// to the nplot, and the error is returned.
+func AddXErrorBars(plt *nplot.Plot, es ...interface {
 	plotter.XYer
 	plotter.XErrorer
 }) error {
-	var ps []plot.Plotter
+	var ps []nplot.Plotter
 	for i, e := range es {
 		bars, err := plotter.NewXErrorBars(e)
 		if err != nil {
@@ -354,20 +354,20 @@ func AddXErrorBars(plt *plot.Plot, es ...interface {
 	return nil
 }
 
-// AddYErrorBars adds YErrorBars to a plot.
+// AddYErrorBars adds YErrorBars to a nplot.
 // The variadic arguments must be
 // of type plotter.XYer, and plotter.YErrorer.
-// Each errorer is added to the plot the color from
+// Each errorer is added to the nplot the color from
 // the Colors function corresponding to its position
 // in the argument list.
 //
 // If an error occurs then none of the plotters are added
-// to the plot, and the error is returned.
-func AddYErrorBars(plt *plot.Plot, es ...interface {
+// to the nplot, and the error is returned.
+func AddYErrorBars(plt *nplot.Plot, es ...interface {
 	plotter.XYer
 	plotter.YErrorer
 }) error {
-	var ps []plot.Plotter
+	var ps []nplot.Plotter
 	for i, e := range es {
 		bars, err := plotter.NewYErrorBars(e)
 		if err != nil {

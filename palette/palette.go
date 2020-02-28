@@ -7,7 +7,7 @@
 // license that can be found in the LICENSE file.
 
 // Package palette provides basic color palette handling.
-package palette // import "github.com/hneemann/plot/palette"
+package palette // import "github.com/hneemann/nplot/palette"
 
 import (
 	"errors"

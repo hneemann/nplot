@@ -7,14 +7,14 @@ package plotter
 import (
 	"errors"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 var (
 	// DefaultFont is the default font for label text.
-	DefaultFont = plot.DefaultFont
+	DefaultFont = nplot.DefaultFont
 
 	// DefaultFontSize is the default font.
 	DefaultFontSize = vg.Points(10)
@@ -73,7 +73,7 @@ func NewLabels(d XYLabeller) (*Labels, error) {
 }
 
 // Plot implements the Plotter interface, drawing labels.
-func (l *Labels) Plot(c draw.Canvas, p *plot.Plot) {
+func (l *Labels) Plot(c draw.Canvas, p *nplot.Plot) {
 	trX, trY := p.Transforms(&c)
 	for i, label := range l.Labels {
 		pt := vg.Point{X: trX(l.XYs[i].X), Y: trY(l.XYs[i].Y)}
@@ -93,9 +93,9 @@ func (l *Labels) DataRange() (xmin, xmax, ymin, ymax float64) {
 
 // GlyphBoxes returns a slice of GlyphBoxes,
 // one for each of the labels, implementing the
-// plot.GlyphBoxer interface.
-func (l *Labels) GlyphBoxes(p *plot.Plot) []plot.GlyphBox {
-	bs := make([]plot.GlyphBox, len(l.Labels))
+// nplot.GlyphBoxer interface.
+func (l *Labels) GlyphBoxes(p *nplot.Plot) []nplot.GlyphBox {
+	bs := make([]nplot.GlyphBox, len(l.Labels))
 	for i, label := range l.Labels {
 		bs[i].X = p.X.Norm(l.XYs[i].X)
 		bs[i].Y = p.Y.Norm(l.XYs[i].Y)

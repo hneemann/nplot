@@ -9,24 +9,24 @@ import (
 	"log"
 	"math"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
 )
 
 func Example_invertedScale() {
 	// This example is nearly identical to the LogScale, other than
 	// both the X and Y axes are inverted. InvertedScale expects to act
 	// on another Normalizer - which should allow for more flexibility
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	p.Title.Text = "Example of inverted axes"
-	p.Y.Scale = plot.InvertedScale{Normalizer: plot.LogScale{}}
-	p.X.Scale = plot.InvertedScale{Normalizer: plot.LinearScale{}}
-	p.Y.Tick.Marker = plot.LogTicks{}
+	p.Y.Scale = nplot.InvertedScale{Normalizer: nplot.LogScale{}}
+	p.X.Scale = nplot.InvertedScale{Normalizer: nplot.LinearScale{}}
+	p.Y.Tick.Marker = nplot.LogTicks{}
 	p.X.Label.Text = "x"
 	p.Y.Label.Text = "f(x)"
 

@@ -7,9 +7,9 @@ package plotter
 import (
 	"image/color"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 // StepKind specifies a form of a connection of two consecutive points.
@@ -42,7 +42,7 @@ type Line struct {
 	// Use zero width to disable lines.
 	draw.LineStyle
 
-	// FillColor is the color to fill the area below the plot.
+	// FillColor is the color to fill the area below the nplot.
 	// Use nil to disable the filling. This is the default.
 	FillColor color.Color
 }
@@ -60,8 +60,8 @@ func NewLine(xys XYer) (*Line, error) {
 	}, nil
 }
 
-// Plot draws the Line, implementing the plot.Plotter interface.
-func (pts *Line) Plot(c draw.Canvas, plt *plot.Plot) {
+// Plot draws the Line, implementing the nplot.Plotter interface.
+func (pts *Line) Plot(c draw.Canvas, plt *nplot.Plot) {
 	trX, trY := plt.Transforms(&c)
 	ps := make([]vg.Point, len(pts.XYs))
 
@@ -139,12 +139,12 @@ func (pts *Line) Plot(c draw.Canvas, plt *plot.Plot) {
 }
 
 // DataRange returns the minimum and maximum
-// x and y values, implementing the plot.DataRanger interface.
+// x and y values, implementing the nplot.DataRanger interface.
 func (pts *Line) DataRange() (xmin, xmax, ymin, ymax float64) {
 	return XYRange(pts)
 }
 
-// Thumbnail returns the thumbnail for the Line, implementing the plot.Thumbnailer interface.
+// Thumbnail returns the thumbnail for the Line, implementing the nplot.Thumbnailer interface.
 func (pts *Line) Thumbnail(c *draw.Canvas) {
 	if pts.FillColor != nil {
 		var topY vg.Length

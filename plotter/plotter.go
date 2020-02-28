@@ -3,24 +3,24 @@
 // license that can be found in the LICENSE file.
 
 // Package plotter defines a variety of standard Plotters for the
-// plot package.
+// nplot package.
 //
-// Plotters use the primitives provided by the plot package to draw to
-// the data area of a plot. This package provides some standard data
+// Plotters use the primitives provided by the nplot package to draw to
+// the data area of a nplot. This package provides some standard data
 // styles such as lines, scatter plots, box plots, labels, and more.
 //
 // New* functions return an error if the data contains Inf, NaN, or is
 // empty. Some of the New* functions return other plotter-specific errors
 // too.
-package plotter // import "github.com/hneemann/plot/plotter"
+package plotter // import "github.com/hneemann/nplot/plotter"
 
 import (
 	"errors"
 	"image/color"
 	"math"
 
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 var (

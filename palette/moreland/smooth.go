@@ -9,7 +9,7 @@ import (
 	"image/color"
 	"math"
 
-	"github.com/hneemann/plot/palette"
+	"github.com/hneemann/nplot/palette"
 )
 
 // smoothDiverging is a smooth diverging color palette as described in

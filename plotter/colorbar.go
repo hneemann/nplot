@@ -7,12 +7,12 @@ package plotter
 import (
 	"image"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/palette"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/palette"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
-// ColorBar is a plot.Plotter that draws a color bar legend for a ColorMap.
+// ColorBar is a nplot.Plotter that draws a color bar legend for a ColorMap.
 type ColorBar struct {
 	ColorMap palette.ColorMap
 
@@ -51,8 +51,8 @@ func (l *ColorBar) check() {
 	}
 }
 
-// Plot implements the Plot method of the plot.Plotter interface.
-func (l *ColorBar) Plot(c draw.Canvas, p *plot.Plot) {
+// Plot implements the Plot method of the nplot.Plotter interface.
+func (l *ColorBar) Plot(c draw.Canvas, p *nplot.Plot) {
 	l.check()
 	colors := l.colors(c)
 	var pImg *Image
@@ -88,7 +88,7 @@ func (l *ColorBar) Plot(c draw.Canvas, p *plot.Plot) {
 }
 
 // DataRange implements the DataRange method
-// of the plot.DataRanger interface.
+// of the nplot.DataRanger interface.
 func (l *ColorBar) DataRange() (xmin, xmax, ymin, ymax float64) {
 	l.check()
 	if l.Vertical {

@@ -9,7 +9,7 @@ import (
 	"image/color"
 	"math"
 
-	"github.com/hneemann/plot/palette"
+	"github.com/hneemann/nplot/palette"
 )
 
 // luminance is a color palette that interpolates

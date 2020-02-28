@@ -8,26 +8,26 @@ import (
 	"log"
 	"os"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
-	"github.com/hneemann/plot/vg/vgtex"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
+	"github.com/hneemann/nplot/vg/vgtex"
 )
 
-// An example of making a LaTeX plot.
+// An example of making a LaTeX nplot.
 func Example() {
 	scatter, err := plotter.NewScatter(plotter.XYs{{X: 1, Y: 1}, {X: 0, Y: 1}, {X: 0, Y: 0}})
 	if err != nil {
 		log.Fatal(err)
 	}
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		log.Fatal(err)
 	}
 	p.Add(scatter)
 	// p.HideAxes()
-	p.Title.Text = `A scatter plot: $\sqrt{\frac{e^{3i\pi}}{2\cos 3\pi}}$`
+	p.Title.Text = `A scatter nplot: $\sqrt{\frac{e^{3i\pi}}{2\cos 3\pi}}$`
 	p.X.Label.Text = `$x = \eta$`
 	p.Y.Label.Text = `$y$ is some $\Phi$`
 

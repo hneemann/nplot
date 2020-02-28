@@ -7,9 +7,9 @@ package plotutil_test
 import (
 	"golang.org/x/exp/rand"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/plotutil"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/plotutil"
 )
 
 func ExampleErrorPoints() {
@@ -28,7 +28,7 @@ func ExampleErrorPoints() {
 		}
 	}
 
-	plt, err := plot.New()
+	plt, err := nplot.New()
 	if err != nil {
 		panic(err)
 	}

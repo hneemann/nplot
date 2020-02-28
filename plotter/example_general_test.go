@@ -7,14 +7,14 @@ package plotter_test
 import (
 	"log"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
 )
 
-// Draw the plot logo.
+// Draw the nplot logo.
 func Example() {
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}
@@ -22,10 +22,10 @@ func Example() {
 	plotter.DefaultLineStyle.Width = vg.Points(1)
 	plotter.DefaultGlyphStyle.Radius = vg.Points(3)
 
-	p.Y.Tick.Marker = plot.ConstantTicks([]plot.Tick{
+	p.Y.Tick.Marker = nplot.ConstantTicks([]nplot.Tick{
 		{Value: 0, Label: "0"}, {Value: 0.25, Label: ""}, {Value: 0.5, Label: "0.5"}, {Value: 0.75, Label: ""}, {Value: 1, Label: "1"},
 	})
-	p.X.Tick.Marker = plot.ConstantTicks([]plot.Tick{
+	p.X.Tick.Marker = nplot.ConstantTicks([]nplot.Tick{
 		{Value: 0, Label: "0"}, {Value: 0.25, Label: ""}, {Value: 0.5, Label: "0.5"}, {Value: 0.75, Label: ""}, {Value: 1, Label: "1"},
 	})
 

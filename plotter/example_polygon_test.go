@@ -9,10 +9,10 @@ import (
 	"log"
 	"math"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/palette/moreland"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/palette/moreland"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
 )
 
 // ExamplePolygon_holes draws a polygon with holes, showing how
@@ -40,7 +40,7 @@ func ExamplePolygon_holes() {
 	}
 	poly.Color = color.NRGBA{B: 255, A: 255}
 
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}
@@ -95,7 +95,7 @@ func ExamplePolygon_hexagons() {
 		return g
 	}
 
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		log.Panic(err)
 	}
@@ -110,7 +110,7 @@ func ExamplePolygon_hexagons() {
 
 	const (
 		r = math.Pi / 4 // r is the hexagon radius.
-		// x0 and y0 are the beginning coordinates for the hexagon plot.
+		// x0 and y0 are the beginning coordinates for the hexagon nplot.
 		x0 = 0.0
 		y0 = 0.0
 		// nx and ny are the number of hexagons in the x and y directions.

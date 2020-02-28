@@ -2,23 +2,23 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package plot_test
+package nplot_test
 
 import (
 	"image/color"
 	"os"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
-	"github.com/hneemann/plot/vg/vgimg"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
+	"github.com/hneemann/nplot/vg/vgimg"
 )
 
 type exampleThumbnailer struct {
 	color.Color
 }
 
-// Thumbnail fulfills the plot.Thumbnailer interface.
+// Thumbnail fulfills the nplot.Thumbnailer interface.
 func (et exampleThumbnailer) Thumbnail(c *draw.Canvas) {
 	pts := []vg.Point{
 		{X: c.Min.X, Y: c.Min.Y},
@@ -48,7 +48,7 @@ func ExampleLegend_standalone() {
 	green := exampleThumbnailer{Color: color.NRGBA{G: 255, A: 255}}
 	blue := exampleThumbnailer{Color: color.NRGBA{B: 255, A: 255}}
 
-	l, err := plot.NewLegend()
+	l, err := nplot.NewLegend()
 	if err != nil {
 		panic(err)
 	}
@@ -58,7 +58,7 @@ func ExampleLegend_standalone() {
 	l.Padding = vg.Millimeter
 
 	// purpleRectangle draws a purple rectangle around the given Legend.
-	purpleRectangle := func(l plot.Legend) {
+	purpleRectangle := func(l nplot.Legend) {
 		r := l.Rectangle(dc)
 		dc.StrokeLines(draw.LineStyle{
 			Color: color.NRGBA{R: 255, B: 255, A: 255},

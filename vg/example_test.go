@@ -19,11 +19,11 @@ import (
 
 	"github.com/golang/freetype/truetype"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
-	"github.com/hneemann/plot/vg/vgimg"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
+	"github.com/hneemann/nplot/vg/vgimg"
 )
 
 func Example_addFont() {
@@ -48,12 +48,12 @@ func Example_addFont() {
 	const fontName = "Mincho"
 	vg.AddFont(fontName, fontTTF)
 
-	plot.DefaultFont = fontName
+	nplot.DefaultFont = fontName
 	plotter.DefaultFont = fontName
 
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
-		log.Fatalf("could not create plot: %+v", err)
+		log.Fatalf("could not create nplot: %+v", err)
 	}
 	p.Title.Text = "Hello, 世界"
 	p.X.Label.Text = "世"
@@ -73,7 +73,7 @@ func Example_addFont() {
 
 	err = p.Save(10*vg.Centimeter, 10*vg.Centimeter, "mincho-font.png")
 	if err != nil {
-		log.Fatalf("could not save plot: %+v", err)
+		log.Fatalf("could not save nplot: %+v", err)
 	}
 }
 
@@ -108,9 +108,9 @@ func untargz(name string, r io.Reader) ([]byte, error) {
 }
 
 func Example_inMemoryCanvas() {
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
-		log.Fatalf("could not create plot: %+v", err)
+		log.Fatalf("could not create nplot: %+v", err)
 	}
 
 	p.Title.Text = "sin(x)"
@@ -149,9 +149,9 @@ func Example_inMemoryCanvas() {
 }
 
 func Example_writerToCanvas() {
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
-		log.Fatalf("could not create plot: %+v", err)
+		log.Fatalf("could not create nplot: %+v", err)
 	}
 
 	p.Title.Text = "cos(x)"

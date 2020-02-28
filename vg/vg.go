@@ -5,7 +5,7 @@
 // Package vg defines an interface for drawing 2D vector graphics.
 // This package is designed with the hope that many different
 // vector graphics back-ends can conform to the interface.
-package vg // import "github.com/hneemann/plot/vg"
+package vg // import "github.com/hneemann/nplot/vg"
 
 import (
 	"image"

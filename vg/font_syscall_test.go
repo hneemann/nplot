@@ -9,7 +9,7 @@ package vg_test
 import (
 	"testing"
 
-	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/nplot/vg"
 )
 
 func TestVGFONTPATH(t *testing.T) {

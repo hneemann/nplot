@@ -9,7 +9,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/nplot/vg"
 )
 
 const tol = 1e-12

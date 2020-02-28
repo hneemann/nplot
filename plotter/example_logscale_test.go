@@ -9,21 +9,21 @@ import (
 	"log"
 	"math"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
 )
 
-// Example_logScale shows how to create a plot with a log-scale on the Y-axis.
+// Example_logScale shows how to create a nplot with a log-scale on the Y-axis.
 func Example_logScale() {
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	p.Title.Text = "My Plot"
-	p.Y.Scale = plot.LogScale{}
-	p.Y.Tick.Marker = plot.LogTicks{}
+	p.Y.Scale = nplot.LogScale{}
+	p.Y.Tick.Marker = nplot.LogTicks{}
 	p.X.Label.Text = "x"
 	p.Y.Label.Text = "f(x)"
 

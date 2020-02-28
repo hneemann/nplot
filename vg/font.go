@@ -16,7 +16,7 @@ import (
 	"path/filepath"
 	"sync"
 
-	"github.com/hneemann/plot/vg/fonts"
+	"github.com/hneemann/nplot/vg/fonts"
 
 	"golang.org/x/image/font"
 	"golang.org/x/image/math/fixed"

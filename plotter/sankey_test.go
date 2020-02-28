@@ -7,12 +7,12 @@ package plotter_test
 import (
 	"testing"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/cmpimg"
-	"github.com/hneemann/plot/plotter"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
-	"github.com/hneemann/plot/vg/recorder"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/cmpimg"
+	"github.com/hneemann/nplot/plotter"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
+	"github.com/hneemann/nplot/vg/recorder"
 )
 
 func TestSankey_simple(t *testing.T) {
@@ -46,19 +46,19 @@ func TestSankey_idempotent(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	p, err := plot.New()
+	p, err := nplot.New()
 	if err != nil {
 		t.Fatal(err)
 	}
 	p.Add(s)
 	p.HideAxes()
 
-	// Draw the plot once.
+	// Draw the nplot once.
 	c1 := new(recorder.Canvas)
 	dc1 := draw.NewCanvas(c1, vg.Centimeter, vg.Centimeter)
 	p.Draw(dc1)
 
-	// Draw the plot a second time.
+	// Draw the nplot a second time.
 	c2 := new(recorder.Canvas)
 	dc2 := draw.NewCanvas(c2, vg.Centimeter, vg.Centimeter)
 	p.Draw(dc2)

@@ -2,30 +2,30 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package plot_test
+package nplot_test
 
 import (
 	"math"
 	"os"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
-	"github.com/hneemann/plot/vg/vgimg"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
+	"github.com/hneemann/nplot/vg/vgimg"
 )
 
 func ExampleAlign() {
 	const rows, cols = 4, 3
-	plots := make([][]*plot.Plot, rows)
+	plots := make([][]*nplot.Plot, rows)
 	for j := 0; j < rows; j++ {
-		plots[j] = make([]*plot.Plot, cols)
+		plots[j] = make([]*nplot.Plot, cols)
 		for i := 0; i < cols; i++ {
 			if i == 0 && j == 2 {
 				// This shows what happens when there are nil plots.
 				continue
 			}
 
-			p, err := plot.New()
+			p, err := nplot.New()
 			if err != nil {
 				panic(err)
 			}
@@ -71,7 +71,7 @@ func ExampleAlign() {
 		PadRight:  vg.Points(2),
 	}
 
-	canvases := plot.Align(plots, t, dc)
+	canvases := nplot.Align(plots, t, dc)
 	for j := 0; j < rows; j++ {
 		for i := 0; i < cols; i++ {
 			if plots[j][i] != nil {

@@ -4,7 +4,7 @@
 
 // Package vgsvg uses svgo (github.com/ajstarks/svgo)
 // as a backend for vg.
-package vgsvg // import "github.com/hneemann/plot/vg/vgsvg"
+package vgsvg // import "github.com/hneemann/nplot/vg/vgsvg"
 
 import (
 	"bufio"
@@ -20,7 +20,7 @@ import (
 
 	svgo "github.com/ajstarks/svgo"
 
-	"github.com/hneemann/plot/vg"
+	"github.com/hneemann/nplot/vg"
 )
 
 // pr is the precision to use when outputting float64s.

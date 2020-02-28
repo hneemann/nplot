@@ -7,16 +7,16 @@ package plotter
 import (
 	"math"
 
-	"github.com/hneemann/plot"
-	"github.com/hneemann/plot/vg"
-	"github.com/hneemann/plot/vg/draw"
+	"github.com/hneemann/nplot"
+	"github.com/hneemann/nplot/vg"
+	"github.com/hneemann/nplot/vg/draw"
 )
 
 // DefaultCapWidth is the default width of error bar caps.
 var DefaultCapWidth = vg.Points(5)
 
-// YErrorBars implements the plot.Plotter, plot.DataRanger,
-// and plot.GlyphBoxer interfaces, drawing vertical error
+// YErrorBars implements the nplot.Plotter, nplot.DataRanger,
+// and nplot.GlyphBoxer interfaces, drawing vertical error
 // bars, denoting error in Y values.
 type YErrorBars struct {
 	XYs
@@ -63,7 +63,7 @@ func NewYErrorBars(yerrs interface {
 }
 
 // Plot implements the Plotter interface, drawing labels.
-func (e *YErrorBars) Plot(c draw.Canvas, p *plot.Plot) {
+func (e *YErrorBars) Plot(c draw.Canvas, p *nplot.Plot) {
 	trX, trY := p.Transforms(&c)
 	for i, err := range e.YErrors {
 		x := trX(e.XYs[i].X)
@@ -85,7 +85,7 @@ func (e *YErrorBars) drawCap(c *draw.Canvas, x, y vg.Length) {
 	c.StrokeLine2(e.LineStyle, x-e.CapWidth/2, y, x+e.CapWidth/2, y)
 }
 
-// DataRange implements the plot.DataRanger interface.
+// DataRange implements the nplot.DataRanger interface.
 func (e *YErrorBars) DataRange() (xmin, xmax, ymin, ymax float64) {
 	xmin, xmax = Range(XValues{e})
 	ymin = math.Inf(1)
@@ -100,8 +100,8 @@ func (e *YErrorBars) DataRange() (xmin, xmax, ymin, ymax float64) {
 	return
 }
 
-// GlyphBoxes implements the plot.GlyphBoxer interface.
-func (e *YErrorBars) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
+// GlyphBoxes implements the nplot.GlyphBoxer interface.
+func (e *YErrorBars) GlyphBoxes(plt *nplot.Plot) []nplot.GlyphBox {
 	rect := vg.Rectangle{
 		Min: vg.Point{
 			X: -e.CapWidth / 2,
@@ -112,19 +112,19 @@ func (e *YErrorBars) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 			Y: +e.LineStyle.Width / 2,
 		},
 	}
-	var bs []plot.GlyphBox
+	var bs []nplot.GlyphBox
 	for i, err := range e.YErrors {
 		x := plt.X.Norm(e.XYs[i].X)
 		y := e.XYs[i].Y
 		bs = append(bs,
-			plot.GlyphBox{X: x, Y: plt.Y.Norm(y - err.Low), Rectangle: rect},
-			plot.GlyphBox{X: x, Y: plt.Y.Norm(y + err.High), Rectangle: rect})
+			nplot.GlyphBox{X: x, Y: plt.Y.Norm(y - err.Low), Rectangle: rect},
+			nplot.GlyphBox{X: x, Y: plt.Y.Norm(y + err.High), Rectangle: rect})
 	}
 	return bs
 }
 
-// XErrorBars implements the plot.Plotter, plot.DataRanger,
-// and plot.GlyphBoxer interfaces, drawing horizontal error
+// XErrorBars implements the nplot.Plotter, nplot.DataRanger,
+// and nplot.GlyphBoxer interfaces, drawing horizontal error
 // bars, denoting error in Y values.
 type XErrorBars struct {
 	XYs
@@ -171,7 +171,7 @@ func NewXErrorBars(xerrs interface {
 }
 
 // Plot implements the Plotter interface, drawing labels.
-func (e *XErrorBars) Plot(c draw.Canvas, p *plot.Plot) {
+func (e *XErrorBars) Plot(c draw.Canvas, p *nplot.Plot) {
 	trX, trY := p.Transforms(&c)
 	for i, err := range e.XErrors {
 		y := trY(e.XYs[i].Y)
@@ -193,7 +193,7 @@ func (e *XErrorBars) drawCap(c *draw.Canvas, x, y vg.Length) {
 	c.StrokeLine2(e.LineStyle, x, y-e.CapWidth/2, x, y+e.CapWidth/2)
 }
 
-// DataRange implements the plot.DataRanger interface.
+// DataRange implements the nplot.DataRanger interface.
 func (e *XErrorBars) DataRange() (xmin, xmax, ymin, ymax float64) {
 	ymin, ymax = Range(YValues{e})
 	xmin = math.Inf(1)
@@ -208,8 +208,8 @@ func (e *XErrorBars) DataRange() (xmin, xmax, ymin, ymax float64) {
 	return
 }
 
-// GlyphBoxes implements the plot.GlyphBoxer interface.
-func (e *XErrorBars) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
+// GlyphBoxes implements the nplot.GlyphBoxer interface.
+func (e *XErrorBars) GlyphBoxes(plt *nplot.Plot) []nplot.GlyphBox {
 	rect := vg.Rectangle{
 		Min: vg.Point{
 			X: -e.LineStyle.Width / 2,
@@ -220,13 +220,13 @@ func (e *XErrorBars) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 			Y: +e.CapWidth / 2,
 		},
 	}
-	var bs []plot.GlyphBox
+	var bs []nplot.GlyphBox
 	for i, err := range e.XErrors {
 		x := e.XYs[i].X
 		y := plt.Y.Norm(e.XYs[i].Y)
 		bs = append(bs,
-			plot.GlyphBox{X: plt.X.Norm(x - err.Low), Y: y, Rectangle: rect},
-			plot.GlyphBox{X: plt.X.Norm(x + err.High), Y: y, Rectangle: rect})
+			nplot.GlyphBox{X: plt.X.Norm(x - err.Low), Y: y, Rectangle: rect},
+			nplot.GlyphBox{X: plt.X.Norm(x + err.High), Y: y, Rectangle: rect})
 	}
 	return bs
 }
